@@ -55,3 +55,5 @@ The [build and required fast check](checks/lean-fast-check.txt) passed. The [run
 - [`hand/README.md`](hand/README.md) gives the steps for the student's handwritten derivation. The required genuine photograph is still pending.
 
 **Submission record:** the `analysis` branch was merged through [PR #1](https://github.com/johnbarraza/ai-06-restrepo/pull/1), and the repository URL was [posted on the course issue](https://github.com/alexanderquispe/AI-Econ-Modeling/issues/5#issuecomment-5765945542). **Remaining requirement:** add a genuine photograph of the student's handwritten derivation to `hand/derivation.jpg` before Thursday, September 24, 22:00 Lima time.
+
+[Original course repository](https://github.com/alexanderquispe/AI-Econ-Modeling)
