@@ -24,7 +24,15 @@ class Case:
         )
 
     def wage_response(self) -> float:
-        return self.productivity_effect - self.displacement()
+        return self.productivity_effect + (1 - self.labor_share) * self.relative_price_response()
+
+    def rental_response(self) -> float:
+        return self.productivity_effect - self.labor_share * self.relative_price_response()
+
+    def relative_price_response(self) -> float:
+        return -self.lambda_i / (
+            self.sigma_hat + self.labor_supply_elasticity
+        )
 
 
 def main() -> None:
@@ -35,9 +43,15 @@ def main() -> None:
     ]
     for case in cases:
         wage = case.wage_response()
+        rent = case.rental_response()
+        # Appendix B, equations (B9) and (B10), for a unit increase in I.
+        assert abs(case.labor_share * wage + (1 - case.labor_share) * rent
+                   - case.productivity_effect) < 1e-12
+        assert abs(wage - rent - case.relative_price_response()) < 1e-12
         direction = "up" if wage > 1e-12 else "down" if wage < -1e-12 else "flat"
         print(f"{case.name}: P={case.productivity_effect:.6f}, "
-              f"D={case.displacement():.6f}, dlnW/dI={wage:.6f} ({direction})")
+              f"D={case.displacement():.6f}, dlnW/dI={wage:.6f} ({direction}), "
+              f"dln(W/R)/dI={case.relative_price_response():.6f}")
 
 
 if __name__ == "__main__":

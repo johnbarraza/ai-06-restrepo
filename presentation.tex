@@ -64,6 +64,18 @@ $I$ is technological feasibility; $I^*$ is actual capital use. They need not coi
 \end{block}
 \end{frame}
 
+\begin{frame}{From tasks to aggregate output}
+\[Y=\widetilde B\left(\int_{N-1}^{N}
+  y(i)^{(\sigma-1)/\sigma}\,di\right)^{\sigma/(\sigma-1)}.\]
+\begin{itemize}
+\item The task interval always has measure one.
+\item $\sigma>0$ governs substitution across tasks; the $\sigma=1$ case is understood by its limit.
+\item Automation changes \emph{who performs} tasks; new task creation shifts the interval to higher $i$.
+\end{itemize}
+\vspace{.4em}
+The resulting aggregate production function has technology-dependent capital and labor weights (Proposition 1).
+\end{frame}
+
 \begin{frame}{The agents' problems}
 \begin{columns}[T]
 \column{.49\textwidth}
@@ -114,6 +126,19 @@ New complex tasks require labor and replace low-index tasks. $W/R$, labor share,
 \end{columns}
 \vspace{.7em}
 These are Proposition 2--3 static comparative statics, not unconditional predictions for a dynamic economy.
+\end{frame}
+
+\begin{frame}{Where the wage equation comes from}
+\begin{align*}
+\text{(B9) }\quad s_L\,d\ln W+(1-s_L)\,d\ln R
+  &=d\ln Y|_{K,L},\\
+\text{(B10), }dN=0:\quad d\ln W-d\ln R
+  &=-\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}\,dI.
+\end{align*}
+\vspace{.4em}
+Let $x=d\ln W$, $z=d\ln R$, and $p=d\ln Y|_{K,L}$. Since $z=x-(x-z)$, (B9) becomes
+\[x=p+(1-s_L)(x-z).\]
+Substituting (B10) gives the Proposition 3 wage decomposition. This two-equation algebra is the natural Lean target.
 \end{frame}
 
 \begin{frame}{The wage trap: two forces}

@@ -14,13 +14,13 @@ Firms minimize the *effective factor cost* task by task: for $i\le I$, they comp
 
 ## Main results and conditions
 
-Propositions 1–3 assume: **(1)** $\gamma(i)$ is strictly increasing; **(2)** either the intermediate-input share $\eta\to0$ or its substitution elasticity $\zeta=1$; and **(3)** $K<\bar K$ as defined in the paper, so the newest task is used. The task elasticity $\sigma>0$, the effective elasticity $\widehat\sigma>0$, and the labor-supply elasticity $\varepsilon_L>0$ enter the comparative statics. The paper's household regularity conditions also apply.
+Propositions 1–3 assume: **(1)** $\gamma(i)$ is strictly increasing; **(2)** either the intermediate-input share $\eta\to0$ or its substitution elasticity $\zeta=1$; and **(3)** $K<\bar K$ as defined in the paper, so the newest task is used. The task elasticity $\sigma>0$, effective elasticity $\widehat\sigma=\sigma(1-\eta)+\zeta\eta>0$, and labor-supply elasticity $\varepsilon_L>0$ enter the comparative statics. In the base environment $\eta\in(0,1)$, $\zeta>0$, $K>0$, and $\nu$ is continuously differentiable, increasing, convex, and satisfies the paper's extra concavity restriction $\nu''(L)+(\theta-1)(\nu'(L))^2/\theta>0$.
 
 When automation is **technology constrained**, $I^*=I<\widetilde I$, Proposition 2 gives
 
 $$\frac{d\ln(W/R)}{dI}=\frac{d\ln\omega}{dI}=-\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}<0,\qquad \Lambda_I>0.$$
 
-The labor share and employment move with $\omega=W/(RK)$, so both fall. Proposition 3 separates the **positive productivity effect** $P_I=d\ln Y|_{K,L}/dI$ from **displacement**:
+The labor share $s_L=WL/(WL+RK)=WL/[(1-\eta)Y]$ and employment move with $\omega=W/(RK)$, so both fall. Proposition 3 separates the **positive productivity effect** $P_I=d\ln Y|_{K,L}/dI$ from **displacement**:
 
 $$\frac{d\ln W}{dI}=P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}.$$
 
@@ -30,7 +30,7 @@ By contrast, creating new tasks ($N\uparrow$) raises $W/R$, employment, labor sh
 
 ## What this run checks
 
-- [`analysis/wage_condition.py`](analysis/wage_condition.py) evaluates the exact Proposition 3 sign condition across transparent illustrative values. These are **comparative-static inputs**, not a calibrated equilibrium or a replication of the paper's full model.
+- [`analysis/wage_condition.py`](analysis/wage_condition.py) evaluates the exact Proposition 3 sign condition and checks that the implied wage and rental-rate responses satisfy Appendix B's (B9) and (B10). Its transparent values are **comparative-static inputs**, not a calibrated equilibrium or a replication of the paper's full model.
 - [`hand/README.md`](hand/README.md) identifies the algebra to verify by hand. The required photograph must be taken from the student's actual handwritten derivation; a typeset derivation is not a substitute.
 - `lean/` will contain the complete `papers/AR18RaceManMachine/` folder from this repository's own GPT-5.6 Sol, `xhigh` AppliedModelingLib run. Its README and status report will state what Lean actually checked. A passing build alone is not a full-paper proof.
 - [`presentation.tex`](presentation.tex) and `presentation.pdf` form the 20-minute deck. [`prompts.md`](prompts.md) records the actual prompt and relevant answer without borrowing a friend's dialogue.

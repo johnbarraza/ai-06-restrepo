@@ -4,6 +4,8 @@ The NBER June 2017 paper's Proposition 3, technology-constrained case $I^*=I<\wi
 
 $$d\ln W=d\ln Y|_{K,L}-(1-s_L)\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}\,dI.$$
 
+This follows directly from the two equations in Appendix B. Equation (B9) is $s_L x+(1-s_L)z=p$, where $x=d\ln W$, $z=d\ln R$, and $p=d\ln Y|_{K,L}$. Equation (B10), for $dN=0$, is $x-z=-\Lambda_I dI/(\widehat\sigma+\varepsilon_L)$. Substituting $z=x-(x-z)$ into (B9) yields $x=p+(1-s_L)(x-z)$, hence the displayed formula. Here $s_L=WL/(WL+RK)=WL/[(1-\eta)Y]$ is the share of **net** output paid to labor.
+
 Holding $N$ fixed and dividing by $dI>0$, let $P_I=(d\ln Y|_{K,L})/dI$. Under the proposition's maintained conditions, $P_I>0$, $\Lambda_I>0$, $0<s_L<1$, $\widehat\sigma>0$, and $\varepsilon_L>0$. Thus the displaced-task term is strictly negative even though productivity rises. The exact local wage condition is
 
 $$\operatorname{sgn}\left(\frac{d\ln W}{dI}\right)=\operatorname{sgn}\left[P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}\right].$$
