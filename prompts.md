@@ -93,3 +93,20 @@ Build completed successfully (8317 jobs).
 ```
 
 The compiled claims are support results conditional on equation (13), factor income, and differentiability. The 19 source-labelled results remain unproved as complete results; `status.json` says `partially formalized`. The source PDF and extracted text stayed ignored by Git.
+
+## User, repository 4 reference and merge request
+
+> https://github.com/gsaco/ai-04-acemoglu/blob/main/prompts.md inspiorate de este tmb pq creo el reademe falta lo de svg y botones y aparce Proposition 2.1. Under those conditions,
+>
+> Extra close brace or missing open brace
+>
+> $$e^{_}(s,a) = \left(x^{_} - s - a\right)_{+}, \qquad
+> p^{_}(s,a) = \max\left{ p(x^{_}),, p(s+a) \right}$$ y no veo lo de lean procede con esto y hazme merge al main con branches
+
+> se debe usar lean reeurda con el repo que me dijeron y las reglas
+
+> ademas no uses guiones como estos cost — which the
+
+> continua
+
+The malformed Proposition 2.1 belonged to the template on `main`, while the Acemoglu and Restrepo work was on `analysis`. This revision adds navigation graphics, makes the required AppliedModelingLib Lean evidence prominent, and corrects GitHub's rendering of the task threshold before merging through the PR. The historical prompts above remain unedited.
