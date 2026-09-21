@@ -55,7 +55,7 @@ tokens used
 374,823
 ```
 
-The session had also found that the first Windows-mounted clone stalled during Lake configuration. A fresh native-WSL clone was therefore prepared, with its Mathlib cache, before the limit occurred. The later scaffold, support proofs, build, fast check, and copy were completed through the assistant's local tools. This distinction is disclosed in `lean/docs/RUN_HANDOFF.md`; the CLI limit is not represented as a successful complete agent workflow.
+The session had also found that the first Windows-mounted clone stalled during Lake configuration. A fresh native-WSL clone was therefore prepared, with its Mathlib cache, before the limit occurred. The initial scaffold, three algebraic support proofs, build, and fast check were completed through the assistant's local tools. The same agent session later resumed and added the model-side proofs recorded below. The original limit is retained here as part of the actual run history.
 
 ## Assistant — local continuation
 
@@ -70,4 +70,26 @@ Build completed successfully (8315 jobs).
 exit_code=0
 ```
 
-The separate full paper target build also passed (`lake build +AR18RaceManMachine`, 8,317 jobs). These checks validate the existing Lean proof terms and repository hygiene, not the complete paper's economic claims.
+The separate full paper target build also passed (`lake build +AR18RaceManMachine`, 8,317 jobs). These were the **interim** checks before the agent resumed.
+
+## AppliedModelingLib agent — resumed prompt
+
+Same session ID `01a0c27f-778f-7df2-9dd9-7b002d8a882e`, configured as `gpt-5.6-sol` with `xhigh` reasoning, now operating on the native WSL clone:
+
+```text
+Continue the same Repository 6 paper-formalization run as GPT-5.6 Sol with xhigh reasoning. The native WSL ext4 clone at /home/johnb/AR18AppliedModelingLib now contains the generated papers/AR18RaceManMachine folder, exact pinned private PDF in its ignored source/, and three conditional algebraic support theorems in MainTheorems.lean. The prior assistant completed these with local tools after your CLI quota interruption; this handoff is explicit in docs/RUN_HANDOFF.md. Inspect and independently check the current source-facing scope, theorem statements and proofs. Make further sound progress toward the paper's task threshold and Proposition 3 wage response, prioritizing a model-to-B9/B10 bridge; do not assume a desired conclusion or falsely claim full named-result coverage. Follow the repository's paper-formalization workflow and preserve all generated audit/status files. Update the paper folder's documentation and status honestly; run lake build +AR18RaceManMachine and python3 scripts/paper_contribution.py check AR18RaceManMachine --fast, with literal outputs. Work only in the native WSL clone using `wsl --cd /home/johnb/AR18AppliedModelingLib env PYTHONPATH=. PATH=/home/johnb/.elan/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin ...` from PowerShell. Do not push or publish.
+```
+
+The agent authored `StaticModel.lean`, `ComparativeStatics.lean`, and the two model-side wage support theorems in `MainTheorems.lean`. It updated the paper-local handoff and audit files. Its final commands passed with exit code 0:
+
+```text
+lake build +AR18RaceManMachine
+Build completed successfully (8319 jobs).
+
+python3 scripts/paper_contribution.py check AR18RaceManMachine --fast
++ lake build +AR18RaceManMachine.PaperInterface
+Build completed successfully (8317 jobs).
++ git diff --check -- papers/AR18RaceManMachine papers/AR18RaceManMachine.lean lakefile.toml ':(exclude)papers/AR18RaceManMachine/source/'
+```
+
+The compiled claims are support results conditional on equation (13), factor income, and differentiability. The 19 source-labelled results remain unproved as complete results; `status.json` says `partially formalized`. The source PDF and extracted text stayed ignored by Git.

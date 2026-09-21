@@ -4,11 +4,11 @@ NBER Working Paper 22252, June 2017, 87 PDF pages. SHA-256 starts \texttt{441d01
 \end{block}
 \begin{itemize}
 \item AppliedModelingLib generated the complete \texttt{AR18RaceManMachine} paper folder.
-\item The Lean target is Appendix B's algebra from (B9) and (B10) to the wage formula.
-\item The code treats the differential values as real variables and takes (B9), (B10) as explicit hypotheses.
+\item Lean encodes the task cutoff, equation (13), factor income, and Appendix B's (B9)--(B10) bridge.
+\item The wage theorem assumes equation (13) and factor income as functional identities, with differentiability and nonzero conditions.
 \end{itemize}
 \vspace{.5em}
-This is a checked \alert{support lemma}, not a proof that the economy satisfies those equations.
+These are checked \alert{support results}; a full equilibrium construction remains open.
 \end{frame}
 
 \begin{frame}[fragile]{Lean 2/5: equation $\rightarrow$ statement $\rightarrow$ proof}
@@ -30,16 +30,14 @@ theorem wage_identity_from_B9_B10
 \footnotesize $s$ encodes labor's net-output share; $dW,dR$ encode the two log changes; $p$ is productivity; $q$ is the relative-price change. The slide spells Lean's $\mathbb R$ notation as \texttt{Real}. Lean verifies the algebra \emph{given} both premises.
 \end{frame}
 
-\begin{frame}{Lean 3/5: why the proof line works}
-Write (B9) and (B10) as zero-valued residuals:
-\begin{align*}
-  A &= s\,dW+(1-s)\,dR-p,\\
-  B &= dW-dR-q.
-\end{align*}
-The Lean proof uses $A+(1-s)B=0$. The $dR$ terms cancel and $s\,dW+(1-s)dW=dW$, leaving
-\[dW-p-(1-s)q=0.\]
+\begin{frame}{Lean 3/5: from the model identities to (B9) and (B10)}
+\begin{itemize}
+\item \texttt{StaticModel.lean}: $I^*=\min\{I,\widetilde I\}$; when the frontier binds, raising $I$ reduces the mass of labor tasks one for one.
+\item \texttt{B9\_from\_factorIncome}: differentiates $WL+RK=(1-\eta)Y$ with fixed $K,L$.
+\item \texttt{B10\_from\_relativeDemandEquation}: differentiates equation (13), including the task integral, and uses $\omega=W/(RK)$.
+\end{itemize}
 \vspace{.4em}
-\texttt{linear\_combination} checks that weighted sum symbolically; it does not infer (B9) or (B10) from the task model.
+The two bridges require explicit functional identities, derivatives, and nonzero denominators. The wage proof then combines (B9) and (B10) by \texttt{linear\_combination}.
 \end{frame}
 
 \begin{frame}[fragile]{Lean 4/5: the exact wage condition}
@@ -54,17 +52,17 @@ theorem automation_wage_rises_iff ... :
   constructor <;> intro h <;> linarith
 \end{lstlisting}
 \vspace{.4em}
-\small The proposition is conditional on the encoded (B9) and (B10) identities. Its variables range over $\mathbb R$; positivity of $\widehat\sigma+\varepsilon_L$ is needed to derive (B10)'s sign from the economic primitives, not for this algebraic equivalence.
+\small The displayed lemma is conditional on (B9) and (B10). The stronger \texttt{automation\_log\_wage\_rises\_iff\_from\_equation13} derives them from explicit model identities. Positivity is needed for the economic sign interpretation.
 \end{frame}
 
 \begin{frame}{Lean 5/5: results and open boundary}
 \begin{block}{Machine results}
 \texttt{lake build +AR18RaceManMachine}: passed.\\
 \texttt{paper\_contribution.py check AR18RaceManMachine --fast}: passed.\\
-Three support theorems use only \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+The checked support theorems use only \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
 \end{block}
 \vspace{.4em}
 \begin{alertblock}{What remains open}
-The full continuum equilibrium, its threshold comparative statics, and the derivation of (B9) and (B10) from the paper's model. No named result is claimed as fully proved. Source-to-Lean review and final closeout were not run.
+The full equilibrium, primitive derivation of equation (13), the $dN$ wage term, and Proposition 3's capital threshold. No named result is claimed as fully proved; source-to-Lean review and final closeout remain open.
 \end{alertblock}
 \end{frame}

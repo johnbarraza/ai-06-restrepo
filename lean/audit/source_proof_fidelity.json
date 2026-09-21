@@ -1,12 +1,63 @@
 {
   "schema": 1,
   "paper": "AR18RaceManMachine",
-  "source_artifact_path": "",
-  "source_artifact_sha256": "",
-  "review_status": "not_started",
-  "reviewed_proof_scopes": [],
-  "model_conventions": [],
-  "checked_proof_steps": [],
+  "source_artifact_path": "papers/AR18RaceManMachine/source/w22252-june2017.pdf",
+  "source_artifact_sha256": "441d01202afd56ef8002fc24ffc2beb51191741c0b5accb11d2534620dd616b7",
+  "review_status": "in_progress",
+  "reviewed_proof_scopes": [
+    {
+      "outcome": "partial_support_only",
+      "semantic_scope": "The unit-width task continuum, technological frontier, equation-(6) cost cutoff, minimum threshold, and tie-to-capital allocation convention.",
+      "source_locator": "Section 2.1 and Section 2.2, equations (5)-(6), footnote 12"
+    },
+    {
+      "outcome": "partial_support_only",
+      "semantic_scope": "Equation (13), Proposition 3's automation wage response, and the Appendix B equations (B9)-(B10) used to obtain it.",
+      "source_locator": "Section 2.3, equation (13) and Proposition 3; Appendix B, equations (B9)-(B10)"
+    }
+  ],
+  "model_conventions": [
+    {
+      "id": "AR18-TASK-INTERVAL-REAL-01",
+      "source_locator": "Section 2.1, equation (1)",
+      "classification": "source_text_model_convention",
+      "formal_meaning": "Tasks are real indices in the closed interval [N-1,N], whose endpoint difference is one; capital and labor task masses are the corresponding subinterval lengths.",
+      "why_needed": "The source treats a continuum of tasks and reasons about its unit measure and moving endpoints.",
+      "checked_scope": "StaticModel.lean proves endpoint width, the two subinterval lengths, and their sum; no measure-theoretic equilibrium integration claim is inferred from these algebraic facts."
+    },
+    {
+      "id": "AR18-THRESHOLD-TIE-CAPITAL-01",
+      "source_locator": "Section 2.2 after equation (6), footnote 12",
+      "classification": "source_text_model_convention",
+      "formal_meaning": "A task at I* is assigned to capital; capital tasks satisfy i <= I* and labor tasks satisfy I* < i.",
+      "why_needed": "The two task regions need an explicit endpoint convention.",
+      "checked_scope": "The Lean partition is exhaustive on the task continuum and the two predicates are disjoint."
+    },
+    {
+      "id": "AR18-NEW-TASK-WORDING-01",
+      "source_locator": "Section 2.1 and discussion following Proposition 3",
+      "classification": "source_text_model_convention",
+      "formal_meaning": "The opposing task-allocation mechanism is recorded as creation of new tasks, the wording used in the June 2017 source; no claim is made that this PDF labels it reinstatement.",
+      "why_needed": "Later terminology should not be projected back into the pinned version as a quotation.",
+      "checked_scope": "The Lean support theorem only states the one-for-one change in labor-task interval length when N changes and the cutoff is held fixed."
+    }
+  ],
+  "checked_proof_steps": [
+    {
+      "id": "AR18-STATIC-THRESHOLD-SUPPORT-01",
+      "source_locator": "Section 2.2, equations (5)-(6), footnote 12",
+      "source_step": "Use strict monotonicity of gamma and W/R = gamma(cost cutoff) to order capital and labor unit costs, then set I* to the minimum of the technology and cost cutoffs.",
+      "checked_conclusion": "With explicit positive divisors, capital is cheaper below the cost cutoff and labor is cheaper above it; min branches, task partition, constrained displacement, and fixed-cutoff new-task expansion are Lean-proved.",
+      "scope": "Support only. Equilibrium existence, market clearing, and Proposition 1 or 2 as complete named results are not proved."
+    },
+    {
+      "id": "AR18-B9-B10-AUTOMATION-SUPPORT-01",
+      "source_locator": "Section 2.3, equation (13) and Proposition 3; Appendix B, equations (B9)-(B10)",
+      "source_step": "Differentiate the lower-bound task ratio in equation (13), differentiate fixed-factor income accounting, convert normalized-wage growth to relative factor-price growth, and solve B9/B10.",
+      "checked_conclusion": "Lean derives -Lambda_I, normalized and factor-price B10, B9, the automation-only wage decomposition, and its strict sign equivalence under explicit differentiability and nonzero hypotheses.",
+      "scope": "Support only. Equation (13) and factor income are supplied as functional identities; dN, primitive equilibrium construction, positivity from paper assumptions, and the K-bar clause remain open."
+    }
+  ],
   "model_convention_entry_schema": {
     "required": [
       "id",
@@ -29,7 +80,92 @@
       "scope"
     ]
   },
-  "defects": [],
+  "defects": [
+    {
+      "id": "AR18-ASSUMPTION2PRIME-EXPONENT-01",
+      "source_locator": "Appendix A, Assumption 2 prime; extracted-text lines 1885-1887",
+      "source_claim": "The third condition uses exponent 2+2 sigma+eta.",
+      "defect_kind": "other",
+      "affected_source_locators": ["Appendix B proof of Lemma A1; extracted-text line 3124"],
+      "statement_impact": "uncertain",
+      "repair_obligation": "Determine whether eta or zeta is intended and recheck the inequality used in Lemma A1.",
+      "acceptance_condition": "A source-supported reading or explicit corrected source statement is fixed and the affected proof is checked without switching exponents silently.",
+      "resolution": "open_proof_obligation",
+      "resolution_evidence": "The current Lean scope does not use Assumption 2 prime.",
+      "status_impact": "partially_formalized",
+      "status_impact_rationale": "The general-model condition is unresolved and no affected named result is claimed."
+    },
+    {
+      "id": "AR18-PROPB1-N-SIGN-01",
+      "source_locator": "Appendix B, Proposition B1 Assumption-2 specialization; extracted-text lines 3180-3192",
+      "source_claim": "The displayed derivative with respect to N equals negative Lambda_N divided by sigma-hat plus epsilon_L.",
+      "defect_kind": "algebra_or_sign",
+      "affected_source_locators": ["Proposition B1 earlier N comparative static", "Appendix equation (B10)"],
+      "statement_impact": "source_statement",
+      "repair_obligation": "Derive the moving-window N response and determine the correct sign without assuming the advertised conclusion.",
+      "acceptance_condition": "A Lean derivation fixes the sign and any source-facing endpoint explicitly records the printed conflict.",
+      "resolution": "open_proof_obligation",
+      "resolution_evidence": "Only the I derivative is currently formalized.",
+      "status_impact": "partially_formalized",
+      "status_impact_rationale": "The dN half of the comparative static and Proposition 3 formula is open."
+    },
+    {
+      "id": "AR18-PROP9-CONSTRAINED-INEQUALITY-01",
+      "source_locator": "Main-text Proposition 9 and Appendix Proposition B2",
+      "source_claim": "The technology-constrained branch is stated as I* = I > cost cutoff.",
+      "defect_kind": "inequality_direction",
+      "affected_source_locators": ["Section 2.2 equation (6)", "Proposition 2 constrained branch"],
+      "statement_impact": "source_statement",
+      "repair_obligation": "Reconcile the proposition premise with I* = min{I,cost cutoff}.",
+      "acceptance_condition": "Any formalized welfare endpoint uses a consistent branch and records the correction if the printed greater-than sign is rejected.",
+      "resolution": "open_proof_obligation",
+      "resolution_evidence": "The current threshold lemmas prove the min branches but no welfare proposition is claimed.",
+      "status_impact": "partially_formalized",
+      "status_impact_rationale": "The affected named welfare results remain outside the proved scope."
+    },
+    {
+      "id": "AR18-PROPB3-ASSUMPTION-REFERENCE-01",
+      "source_locator": "Appendix B, Proposition B3 following Assumption 2 double-prime",
+      "source_claim": "Proposition B3 invokes Assumption 1 double-prime.",
+      "defect_kind": "logical_dependency",
+      "affected_source_locators": ["Appendix B, Assumption 2 double-prime"],
+      "statement_impact": "uncertain",
+      "repair_obligation": "Determine which assumptions the variant equilibrium actually requires.",
+      "acceptance_condition": "A source-facing Spec exposes the exact supported premise set and does not silently substitute an assumption number.",
+      "resolution": "open_proof_obligation",
+      "resolution_evidence": "Proposition B3 is not formalized.",
+      "status_impact": "partially_formalized",
+      "status_impact_rationale": "The premise set of Proposition B3 is unresolved."
+    },
+    {
+      "id": "AR18-PROPB3-MARKET-CLEARING-01",
+      "source_locator": "Appendix B, Proposition B3 and its preceding variant model",
+      "source_claim": "The baseline market-clearing equations (8)-(9) continue to characterize a model in which non-automated tasks can also demand capital.",
+      "defect_kind": "logical_dependency",
+      "affected_source_locators": ["Appendix B equation (B17) and Proposition B3 proof"],
+      "statement_impact": "uncertain",
+      "repair_obligation": "Re-derive factor demands and market clearing for the variant technology.",
+      "acceptance_condition": "The stated equations follow from the variant production functions or are explicitly corrected before use.",
+      "resolution": "open_proof_obligation",
+      "resolution_evidence": "The variant is outside the current Lean model.",
+      "status_impact": "partially_formalized",
+      "status_impact_rationale": "The Appendix B3 equilibrium is not claimed."
+    },
+    {
+      "id": "AR18-DYNAMIC-WAGE-INDEX-01",
+      "source_locator": "Dynamic-model wage display identified in the full source-only pass",
+      "source_claim": "One displayed dynamic wage expression uses both n-star and n as its evaluation index.",
+      "defect_kind": "index_or_integrality",
+      "affected_source_locators": ["Dynamic wage derivation surrounding that display"],
+      "statement_impact": "uncertain",
+      "repair_obligation": "Identify the intended evaluation point from the surrounding equilibrium system.",
+      "acceptance_condition": "The intended index is derived and pinned before any dynamic wage statement is formalized.",
+      "resolution": "open_proof_obligation",
+      "resolution_evidence": "The current work is confined to the static model.",
+      "status_impact": "partially_formalized",
+      "status_impact_rationale": "No dynamic result is claimed."
+    }
+  ],
   "defect_entry_schema": {
     "required": [
       "id",

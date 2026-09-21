@@ -10,35 +10,60 @@ after routine proof steps.
 
 ## Initial Outside-Lean Paper Audit
 
-- Source version / local files inspected:
-- Source/version mismatch notes:
-- Complete named-result ledger status:
+- Source version / local files inspected: exact 87-page June 2017 NBER PDF and
+  complete 4,689-line extracted text; PDF SHA-256
+  `441d01202afd56ef8002fc24ffc2beb51191741c0b5accb11d2534620dd616b7`.
+- Source/version mismatch notes: none; the priority displays and Proposition 3
+  were visually checked in the pinned PDF rather than inferred from OCR alone.
+- Complete named-result ledger status: source-only inventory has 19 candidates
+  (Propositions 1--9, Corollaries 1--2, Lemmas A1--A3, Propositions B1--B4,
+  Lemma B1). The v11 source map and selected row dispositions are not complete.
 - Formula sanity check:
-  - Signs, constants, normalizations, quantifiers, domains:
-  - Density vs mass / likelihood-kernel representation issues:
-  - Dependency map between named source results:
+  - Signs, constants, normalizations, quantifiers, domains: equation (13)'s
+    coefficient placement and Proposition 3's denominator `σ̂+ε_L` were
+    visually confirmed. Open source inconsistencies are listed in
+    `FORMALIZATION_WORKING_MEMO.md`.
+  - Density vs mass / likelihood-kernel representation issues: task mass is
+    interval length on `[N-1,N]`; no probability kernel is involved.
+  - Dependency map between named source results: Proposition 1 supplies the
+    equilibrium; Proposition 2 supplies comparative statics; Proposition 3
+    combines productivity changes with B9/B10. Appendix B1 generalizes
+    Proposition 2 and Appendix B9/B10 provide its wage algebra.
   - Formula-bearing displayed claims that need derivation, not source-row assumptions:
+    equation (13), `Λ_I`, B9, B10, both `dI` and `dN` productivity responses,
+    and the capital-threshold existence clause.
 - Named result sanity check:
   - Results that look correct as stated:
   - Suspected bugs, missing assumptions, or ambiguous wording:
 - Source-proof fidelity ledger (`audit/source_proof_fidelity.json`):
-  - Proof scopes reviewed by source locator and mathematical claim:
+  - Proof scopes reviewed by source locator and mathematical claim: static task
+    allocation through equation (13), Proposition 3's wage display, and the
+    Appendix B9/B10 passage; review remains in progress.
   - Source proof defects, if any, with repair obligation and acceptance condition:
-  - Proof-only defects kept out of `Assumptions.lean`:
+    exponent, sign, and inequality-direction leads are recorded but unresolved.
+  - Proof-only defects kept out of `Assumptions.lean`: yes; that module remains
+    empty and none of the source issues is treated as an assumption.
 - Shared-library reuse checkpoint:
-  - Mathlib declarations/modules inspected:
+  - Mathlib declarations/modules inspected: interval-integral lower-bound
+    differentiation, `HasDerivAt` quotient/log/composition rules, ordered-field
+    division lemmas, and ring/linear arithmetic tactics.
   - Cslib declarations/modules inspected:
   - Optlib declarations/modules inspected:
   - Other potential upstream sources inspected:
   - Upstream sources used or ported, with citation/provenance:
-  - Existing `AppliedModelingLib` declarations/modules inspected:
-  - API chosen and near-misses:
+  - Existing `AppliedModelingLib` declarations/modules inspected: no suitable
+    paper-specific task-continuum or equilibrium bridge was identified during
+    this proof seam; a full repository-wide reusable-library search remains due.
+  - API chosen and near-misses: Mathlib calculus APIs were used directly.
   - Source-defined objects that will use reusable library definitions, their
     exact source routes, and their planned material-library semantic reviews:
 - Proof strategy consequences:
-  - Source proof route to follow:
-  - Cleaner Lean route or reusable library route:
-  - Major issues already reported to the user:
+  - Source proof route to follow: derive `-Λ_I` from equation (13), derive B9
+    from factor income, bridge `ω=W/(RK)`, then solve B9/B10.
+  - Cleaner Lean route or reusable library route: direct real calculus followed
+    by algebraic elimination.
+  - Major issues already reported to the user: see the source-only inventory
+    and working memo; none has been repaired into a source-facing theorem.
 - Algorithmic complexity audit, when applicable:
   - Transitive operational dependency graph over every reachable branch and old semantic closure/oracle dependencies:
   - Worst-case recurrence and bound over the stated input-size measure:
@@ -48,9 +73,13 @@ after routine proof steps.
 
 ## Source Inventory
 
-- Definitions / formatted paper objects:
-- Named lemmas / propositions / theorems / corollaries:
-- Named assumptions / model conditions used by those results:
+- Definitions / formatted paper objects: task continuum `[N-1,N]`, automation
+  frontier `I`, cost cutoff `Ĩ`, equilibrium cutoff `I*`, unit costs, normalized
+  wage `ω`, labor supply, task ratio, `Λ_I`, factor-income identity, B9/B10.
+- Named lemmas / propositions / theorems / corollaries: 19 candidates listed in
+  `SOURCE_ONLY_INVENTORY.md`.
+- Named assumptions / model conditions used by those results: Assumptions 1,
+  2, 3, 1′, 4, 1″, 2′, and 2″.
 - Deep-only prose, standalone formulas, algorithms, figures, simulations, and
   computational examples (record scope disposition; do not create normal-mode
   proof targets merely because they are numbered or displayed):
@@ -93,9 +122,12 @@ the statement skeleton is still cheap, rather than during final closeout.
 
 ## Initial Proof Strategy
 
-- Main theorem chain:
+- Main theorem chain: task threshold and allocation; equation (13) to B10;
+  fixed-factor income identity to B9; B9+B10 to the automation wage response.
 - Likely reusable `AppliedModelingLib` seams:
-- Paper steps that look underspecified or analytically hard:
+- Paper steps that look underspecified or analytically hard: full equilibrium
+  existence/uniqueness, the `dN` response, positivity from primitive model
+  assumptions, and the Proposition 3 `K̄` existence/order result.
 - Formal target map:
   - Rows to fully prove now:
   - Empirical/descriptive rows out of formal theorem scope:
@@ -261,10 +293,16 @@ Planned commands, in order:
 
 ## Active Scratchpad
 
-- Current Lean endpoint:
-- Exact current mathematical gap:
-- Next bridge lemmas to try:
-- Informal proof sketch / recurrence / construction:
+- Current Lean endpoint: `automation_wage_decomposition_from_equation13` and
+  `automation_log_wage_rises_iff_from_equation13`.
+- Exact current mathematical gap: derive equation (13) from a constructed
+  equilibrium, add the `Λ_N dN` branch, and prove the paper's capital threshold.
+- Next bridge lemmas to try: continuity/positivity of `paperTaskWeight`, the
+  upper-bound/moving-window derivative for `N`, and primitive equilibrium-to-
+  relative-demand identities.
+- Informal proof sketch / recurrence / construction: apply Leibniz/FTC to the
+  task integral and moving denominator, differentiate labor-supply composition,
+  cancel positive levels, then solve the two factor-price log equations.
 
 ## Issue And Deviation Log
 
