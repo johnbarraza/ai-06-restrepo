@@ -1,114 +1,208 @@
 \documentclass[aspectratio=169,11pt]{beamer}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage[english]{babel}
-\usepackage{amsmath,amssymb}
-\usepackage{booktabs}
-\usetheme{default}
-\usecolortheme{seahorse}
+\usetheme{Madrid}
+\usecolortheme{default}
+\usepackage{amsmath,amssymb,booktabs}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepackage{listings}
+\definecolor{navy}{RGB}{16,42,68}
+\definecolor{teal}{RGB}{0,111,116}
+\definecolor{pale}{RGB}{239,246,246}
+\setbeamercolor{structure}{fg=navy}
+\setbeamercolor{frametitle}{fg=white,bg=navy}
+\setbeamercolor{block title}{fg=white,bg=teal}
+\setbeamercolor{block body}{fg=navy,bg=pale}
 \setbeamertemplate{navigation symbols}{}
-\setbeamertemplate{footline}[frame number]
-\setbeamerfont{frametitle}{size=\large}
-
-\title{Aouad, Lykouris \& Zhong (2026)}
-\subtitle{\emph{Human-AI Productivity Paradoxes} --- Section 2}
-\author{Alexander Quispe}
-\date{Repository 1 \textperiodcentered{} Week of August 17--22}
-
+\setbeamertemplate{footline}{}
+\setbeamertemplate{headline}{}
+\setbeamertemplate{itemize item}{\color{teal}$\blacktriangleright$}
+\lstset{basicstyle=\ttfamily\scriptsize,breaklines=true,frame=single,
+  rulecolor=\color{teal},keywordstyle=\color{navy}\bfseries}
+\title{The Race between Man and Machine}
+\subtitle{Tasks, wages, and what a formal proof can establish}
+\author{John Barraza}
+\date{Repository 6 \quad | \quad September 2026}
 \begin{document}
 
-%================= PORTADA (con el enlace al repositorio) =============
-\begin{frame}[plain]
-  \titlepage
-  \begin{center}\small
-    \texttt{github.com/alexanderquispe/ai-01-aouad}
-  \end{center}
+\begin{frame}
+\titlepage
+\centering\small\url{https://github.com/johnbarraza/ai-06-restrepo}
 \end{frame}
 
-%================= 1. EL ART\'ICULO ====================================
-\begin{frame}{1 \textperiodcentered{} The paper and the agent's problem}
-  \textbf{Question.} When does AI assistance make a worker \emph{less} productive?
-
-  \medskip
-  \textbf{The single mechanism.} AI is a \emph{perfectly substitutable input}:
-  skill, effort and assistance enter production only through their sum.
-  \[ x \;=\; s + e + a \]
-
-  \medskip
-  \textbf{The agent's problem.} Choose effort $e$ to maximise output net of a
-  \emph{linear} cost:
-  \[ \max_{e \ge 0}\; p(s+e+a) \;-\; \gamma e \]
-
-  \smallskip
-  \begin{itemize}\small
-    \item $p$ weakly increasing, concave, twice differentiable; $\gamma>0$.
-    \item Only constraint: $e \ge 0$ --- and it binds. That is the whole result.
-  \end{itemize}
+\begin{frame}{Road map for 20 minutes}
+\begin{enumerate}
+\item The aggregate task economy and equilibrium threshold
+\item Automation versus new tasks: opposite reallocations
+\item The wage condition, its analytical and numerical check
+\item Lean translation: checked theorem, proof step, and limits
+\item Hand verification and verdict
+\end{enumerate}
 \end{frame}
 
-%================= 2. EL RESULTADO ===================================
-\begin{frame}{2 \textperiodcentered{} Proposition 2.1, with all its conditions}
-  Define $x^{*}$ as the \emph{largest} maximiser of $p(x)-\gamma x$:
-  \[ x^{*} \;=\; \max\,\arg\max_{x}\;\bigl[\,p(x)-\gamma x\,\bigr] \]
-
-  \textbf{Regularity condition} (without it $x^{*}$ need not exist):
-  \[ \limsup_{x\to\infty} \frac{p(x)}{x} \;<\; \gamma \]
-
-  \medskip
-  \textbf{Then}
-  \[ e^{*}(s,a) = \bigl(x^{*}-s-a\bigr)_{+}, \qquad
-     p^{*}(s,a) = \max\bigl\{\,p(x^{*}),\; p(s+a)\,\bigr\} \]
-
-  \medskip
-  \footnotesize\emph{Intuition.} The agent has one target level of total input;
-  he tops it up with effort, and once skill plus AI already reach it he simply
-  stops working.
+\begin{frame}{Question and unit of analysis}
+\begin{block}{Question}
+Can automation raise output yet lower the wage? Can new tasks reverse the fall in labor's share?
+\end{block}
+\vspace{.5em}
+Unlike the earlier weekly papers, the unit here is the \alert{aggregate economy}: a continuum of production tasks and competitive factor markets.
 \end{frame}
 
-%================= 3. LO QUE HICE ====================================
-\begin{frame}{3 \textperiodcentered{} What I did}
-  \textbf{Reproduced} Proposition 2.1 by hand --- the interior-versus-corner
-  split, with no differentiation in the proof (\texttt{hand/}).
-
-  \medskip
-  \textbf{Assumptions I considered relaxing}
-  \begin{itemize}\small
-    \item \textbf{Linear cost $\to$ convex.} \emph{Dead end}: the authors already
-      do it in Appendix D (Props. D.3, D.6). Replication, not extension.
-    \item \textbf{Myopia.} A two-period agent who internalises skill dynamics.
-      Never relaxed anywhere in the paper --- this is the live one.
-    \item \textbf{Complementarity inside $p(\cdot)$} rather than as an added
-      interaction term. Harder: \S{}4.4 and \S{}5.3 partly pre-empt it.
-  \end{itemize}
-
-  \medskip
-  \textbf{Also produced} a full step-by-step tutorial of the paper and two
-  lecture decks (\texttt{extra/}).
+\begin{frame}{The task space}
+\centering
+\begin{tikzpicture}[>=stealth,scale=1]
+\draw[very thick,teal] (0,0)--(10,0);
+\draw[thick] (0,-.15)--(0,.15) node[above] {$N-1$};
+\draw[thick] (4,-.15)--(4,.15) node[above] {$I^*$};
+\draw[thick] (7,-.15)--(7,.15) node[above] {$I$};
+\draw[thick] (10,-.15)--(10,.15) node[above] {$N$};
+\draw[<->,navy,thick] (.1,-.7)--(3.9,-.7) node[midway,below] {capital performs};
+\draw[<->,teal,thick] (4.1,-.7)--(9.9,-.7) node[midway,below] {labor performs};
+\end{tikzpicture}
+\vspace{1em}
+\begin{block}{Two frontiers}
+$I$ is technological feasibility; $I^*$ is actual capital use. They need not coincide.
+\end{block}
 \end{frame}
 
-%================= 4. LA IA =========================================
-\begin{frame}{4 \textperiodcentered{} Where I did not believe the AI}
-  \textbf{What I asked.} ``What is the most natural extension of this model?''
+\begin{frame}{The agents' problems}
+\begin{columns}[T]
+\column{.49\textwidth}
+\textbf{Competitive task producer}
+\vspace{.4em}
+For $i\le I$, compare factor costs
+\vspace{.3em}
+\[\min\left\{R,\frac{W}{\gamma(i)}\right\}.\]
+For $i>I$, only labor is feasible. Intermediate inputs also enter full unit cost.
+\column{.49\textwidth}
+\textbf{Representative household}
+\vspace{.4em}
+Choose $(C,L)$ with $C=WL+RK$ to maximize the paper's $u(C,L)$. At an interior choice:
+\[\nu'(L)=\frac{W}{C}.\]
+\end{columns}
+\end{frame}
 
-  \medskip
-  \textbf{What the model answered.} Relax the linear cost $c(e)=\gamma e$ to a
-  strictly convex $c(e)$ --- presented confidently as an open direction.
+\begin{frame}{Comparative advantage implies a threshold}
+\[\frac{W}{R}=\gamma(\widetilde I),\qquad I^*=\min\{I,\widetilde I\}.\]
+\begin{itemize}
+\item $\gamma(i)$ strictly increases: labor has an advantage in more complex tasks.
+\item Below $I^*$: capital is cheaper; above $I^*$: labor is used.
+\item If $I<\widetilde I$, technology constrains automation.
+\item If $\widetilde I<I$, technology is slack; more feasible automation changes nothing locally.
+\end{itemize}
+\end{frame}
 
-  \medskip
-  \textbf{My verdict: \textcolor{red}{incorrect as an extension}.}
-  \begin{itemize}\small
-    \item Appendix D is titled \emph{``Extension to convex cost functions''} and
-      redoes Sections 2--4 under strictly convex cost.
-    \item So the proposal is already in the paper. I checked the appendix
-      directly rather than taking the answer at face value.
-    \item \emph{Caveat worth keeping:} Appendix D covers \S\S{}2--4 but \textbf{not}
-      \S{}5, so convex cost applied to the skill-polarisation result is genuinely
-      untouched.
-  \end{itemize}
+\begin{frame}{Conditions behind the static results}
+\begin{enumerate}
+\item $\gamma(i)$ strictly increasing (Assumption 1).
+\item $\eta\to0$ or $\zeta=1$ (Assumption 2): homothetic factor demand.
+\item $K<\bar K$ (Assumption 3): new tasks are used.
+\end{enumerate}
+\vspace{.6em}
+$\sigma>0$, $\widehat\sigma>0$, $\varepsilon_L>0$, and the household's convexity and regularity conditions also matter. Proposition 1 supplies a unique static equilibrium under these conditions.
+\end{frame}
 
-  \medskip
-  \footnotesize The step I re-derived by hand is in \texttt{hand/} --- I did not
-  trust the algebra of the first-order condition until I had written it out.
+\begin{frame}{Automation and reinstatement}
+\begin{columns}[T]
+\column{.49\textwidth}
+\begin{block}{Automation: $I\uparrow$}
+Capital takes over some existing labor tasks. In the constrained regime, $W/R$, labor share, and employment fall.
+\end{block}
+\column{.49\textwidth}
+\begin{block}{New tasks: $N\uparrow$}
+New complex tasks require labor and replace low-index tasks. $W/R$, labor share, employment, and the wage rise.
+\end{block}
+\end{columns}
+\vspace{.7em}
+These are Proposition 2--3 static comparative statics, not unconditional predictions for a dynamic economy.
+\end{frame}
+
+\begin{frame}{The wage trap: two forces}
+\[\underbrace{\frac{d\ln W}{dI}}_{\text{wage response}}
+=\underbrace{P_I}_{\text{productivity gain}}
+-\underbrace{\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}}_{\text{displacement}}.\]
+\begin{block}{Exact local condition, $I^*=I<\widetilde I$}
+The wage rises iff
+\[P_I>\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}.\]
+Equality gives no local change; a reversed inequality gives a fall.
+\end{block}
+\end{frame}
+
+\begin{frame}{A different sign is fixed}
+\[\frac{d\ln(W/R)}{dI}=-\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}<0.\]
+The labor share and employment move with $\omega=W/(RK)$ and therefore fall in the constrained case.
+\vspace{.8em}
+\begin{alertblock}{Interpretation}
+A falling labor share does not prove that the \emph{level} of the real wage falls. Productivity and displacement compete in the wage equation.
+\end{alertblock}
+\end{frame}
+
+\begin{frame}{Analytical and computational check}
+\begin{center}
+\begin{tabular}{lccc}
+\toprule
+Illustrative case & $P_I$ & displacement & $d\ln W/dI$ \\
+\midrule
+Large productivity gain & .400 & .133 & +.267 \\
+Small productivity gain & .050 & .133 & $-.083$ \\
+Equality & .133 & .133 & $0$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+\vspace{.4em}
+Same $s_L=.6$, $\Lambda_I=.5$, $\widehat\sigma=1$, $\varepsilon_L=.5$ in every row. Reproduce with \texttt{python analysis/wage\_condition.py}. These inputs illustrate the sign identity; they are not solved equilibria.
+\end{frame}
+
+\begin{frame}{Where I did not trust the AI}
+\begin{alertblock}{Claim to test}
+``Automation necessarily reduces wages and labor's share.''
+\end{alertblock}
+\begin{itemize}
+\item Labor share falls only when the automation frontier binds; at a slack frontier, a small increase in $I$ has no effect.
+\item The wage can rise when the productivity gain dominates displacement.
+\item At $I^*=I=\widetilde I$, use one-sided derivatives.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hand check: the decisive inequality}
+\IfFileExists{hand/derivation.jpg}{\centering\includegraphics[height=.62\textheight]{hand/derivation.jpg}}{
+\begin{center}\fbox{\parbox{.75\textwidth}{\centering Real photograph of the student's handwritten derivation pending. See \texttt{hand/README.md}.}}\end{center}}
+\vspace{.3em}
+\centering\small
+$d\ln W/dI=P_I-D_I$, so a wage increase requires $P_I>D_I$.
+\end{frame}
+
+\IfFileExists{lean-slides.tex}{\input{lean-slides.tex}}{%
+\begin{frame}{Lean run: source to statement}
+\begin{block}{Pending run}
+The own-run formalization is in progress. This slide will show an actual source claim, exact Lean statement, and proof fragment after the check; no placeholder theorem is presented as verified.
+\end{block}
+\end{frame}
+}
+
+\begin{frame}{What the checks can and cannot conclude}
+\begin{itemize}
+\item The computational script verifies arithmetic on the stated wage identity.
+\item Lean's compiler can verify a formal theorem only under its encoded assumptions and domain.
+\item Matching the NBER claim requires a separate source-to-Lean comparison.
+\item The full continuum equilibrium and all its comparative statics should be counted only if formally represented and proved.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Conclusion}
+\begin{block}{Economic result}
+Automation reallocates tasks away from labor. With a binding frontier, labor share falls, while wages depend on the balance between productivity and displacement. New tasks reinstate labor.
+\end{block}
+\vspace{.5em}
+\begin{block}{Methodological result}
+The threshold, regime conditions, and sign inequality must all be explicit in any Lean translation or oral explanation.
+\end{block}
+\end{frame}
+
+\begin{frame}{Sources}
+\small
+Acemoglu, D., and P. Restrepo (2018). ``The Race between Man and Machine: Implications of Technology for Growth, Factor Shares, and Employment.'' \emph{AER} 108(6), 1488--1542.\\[.6em]
+Formalization source: NBER Working Paper 22252, revised June 2017, 87 pages. In particular Section 2, Propositions 1--3 and Appendix B.\\[.6em]
+Course requirement: \url{https://github.com/alexanderquispe/AI-Econ-Modeling/issues/5}
 \end{frame}
 
 \end{document}
