@@ -54,4 +54,4 @@ The [build and required fast check](checks/lean-fast-check.txt) passed. The [run
 - [`prompts.md`](prompts.md) records our raw prompts and relevant responses. The repository 4 and 5 examples informed the presentation, but their dialogue and Lean work are not claimed as ours.
 - [`hand/README.md`](hand/README.md) gives the steps for the student's handwritten derivation. The required genuine photograph is still pending.
 
-**Remaining requirement:** add a genuine photograph of the student's handwritten derivation to `hand/derivation.jpg` before the Thursday, September 24, 22:00 deadline (Lima time). The repository link must also be posted on the [course issue](https://github.com/alexanderquispe/AI-Econ-Modeling/issues/5).
+**Submission record:** the `analysis` branch was merged through [PR #1](https://github.com/johnbarraza/ai-06-restrepo/pull/1), and the repository URL was [posted on the course issue](https://github.com/alexanderquispe/AI-Econ-Modeling/issues/5#issuecomment-5765945542). **Remaining requirement:** add a genuine photograph of the student's handwritten derivation to `hand/derivation.jpg` before Thursday, September 24, 22:00 Lima time.
