@@ -44,6 +44,20 @@ in `docs/SOURCE_ONLY_INVENTORY.md` and
 `in_progress`; it records support steps and six open defects without treating
 any as an assumption.
 
+## Later joint task extension
+
+`JointTaskExtension.lean` was added in the same local AppliedModelingLib paper
+folder after the initial formalization run. It imports `StaticModel.lean` and
+proves the exact change in labor task mass when task creation and automation
+occur together, provided both allocations are feasible and the technological
+frontier binds in both states. It also proves the strict condition for that
+mass to grow. See `docs/EXTENSION_NOTE.md` for the mathematical statement and
+scope. This is an independently checked support extension, not a claim that
+Lean has proved a new wage or employment theorem.
+
+The two extension theorems were checked with `#print axioms`. Both reported
+`[propext, Classical.choice, Quot.sound]` and no paper specific axiom.
+
 ## Checks and provenance
 
 - Exact final command:
@@ -55,7 +69,7 @@ any as an assumption.
   Literal output (exit code 0):
 
   ```text
-  Build completed successfully (8319 jobs).
+  Build completed successfully (8320 jobs).
   ```
 
 - Exact final command:
@@ -68,7 +82,7 @@ any as an assumption.
 
   ```text
   + lake build +AR18RaceManMachine.PaperInterface
-  Build completed successfully (8317 jobs).
+  Build completed successfully (8318 jobs).
   + git diff --check -- papers/AR18RaceManMachine papers/AR18RaceManMachine.lean lakefile.toml ':(exclude)papers/AR18RaceManMachine/source/'
   ```
 

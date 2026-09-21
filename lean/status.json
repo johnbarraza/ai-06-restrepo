@@ -8,8 +8,8 @@
   "repository_visibility": "private_only",
   "build_target": "lake build +AR18RaceManMachine",
   "status": "partially formalized",
-  "main_caveat": "Lean now proves the task-cutoff minimum and allocation arithmetic, cost ordering around the cutoff, the equation-(13)-to-(B10) derivative bridge, the fixed-factor-income-to-(B9) bridge, and the resulting automation-only wage equality and sign condition. It still assumes the equilibrium identities as functional premises; the full equilibrium, the dN term, the Proposition 3 capital-threshold clause, all 19 named results, and source-to-Lean semantic review remain open.",
-  "human_summary": "NBER Working Paper 22252, June 2017, 87 pages. Paper-local support proofs now connect the task threshold and exact equation (13) to the automation-only Proposition 3 wage decomposition through B9/B10. This is partial named-result coverage only; no source-labelled result is claimed as fully formalized.",
+  "main_caveat": "Lean proves task allocation support, the conditional joint task mass extension, the equation (13) to (B10) derivative bridge, the fixed factor income to (B9) bridge, and the automation wage equality and sign condition. The extension proves task mass accounting only. The full equilibrium, the dN wage term, the Proposition 3 capital threshold clause, all 19 named results, and source to Lean semantic review remain open.",
+  "human_summary": "NBER Working Paper 22252, June 2017, 87 pages. Support proofs connect the task threshold and equation (13) to the automation wage decomposition through B9 and B10. A separate conditional extension proves the net change in labor task mass under simultaneous task creation and automation. No source labelled result is claimed as fully formalized.",
   "human_summary_review": {
     "status": "draft",
     "note": "Set to human_approved only after a human has written or explicitly approved this summary; do not rewrite a human_approved summary without explicit human instruction."

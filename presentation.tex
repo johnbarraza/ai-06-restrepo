@@ -33,8 +33,8 @@
 \begin{enumerate}
 \item The aggregate task economy and equilibrium threshold
 \item Automation versus new tasks: opposite reallocations
-\item The wage condition, its analytical and numerical check
-\item Lean translation: checked theorem, proof step, and limits
+\item The wage condition and a joint task extension with a visual check
+\item Lean translation: checked theorems, proof steps, and limits
 \item Hand verification and verdict
 \end{enumerate}
 \end{frame}
@@ -73,7 +73,7 @@ $I$ is technological feasibility; $I^*$ is actual capital use. They need not coi
 \item Automation changes \emph{who performs} tasks; new task creation shifts the interval to higher $i$.
 \end{itemize}
 \vspace{.4em}
-The resulting aggregate production function has technology-dependent capital and labor weights (Proposition 1).
+The resulting aggregate production function has capital and labor weights that depend on technology (Proposition 1).
 \end{frame}
 
 \begin{frame}{The agents' problems}
@@ -121,11 +121,11 @@ Capital takes over some existing labor tasks. In the constrained regime, $W/R$, 
 \end{block}
 \column{.49\textwidth}
 \begin{block}{New tasks: $N\uparrow$}
-New complex tasks require labor and replace low-index tasks. $W/R$, labor share, employment, and the wage rise.
+New complex tasks require labor and replace tasks with lower indices. $W/R$, labor share, employment, and the wage rise.
 \end{block}
 \end{columns}
 \vspace{.7em}
-These are Proposition 2--3 static comparative statics, not unconditional predictions for a dynamic economy.
+These are Propositions 2 and 3 static comparative statics, not unconditional predictions for a dynamic economy.
 \end{frame}
 
 \begin{frame}{Where the wage equation comes from}
@@ -138,7 +138,7 @@ These are Proposition 2--3 static comparative statics, not unconditional predict
 \vspace{.4em}
 Let $x=d\ln W$, $z=d\ln R$, and $p=d\ln Y|_{K,L}$. Since $z=x-(x-z)$, (B9) becomes
 \[x=p+(1-s_L)(x-z).\]
-Substituting (B10) gives the Proposition 3 wage decomposition. This two-equation algebra is the natural Lean target.
+Substituting (B10) gives the Proposition 3 wage decomposition. This algebra from two equations is the natural Lean target.
 \end{frame}
 
 \begin{frame}{The wage trap: two forces}
@@ -177,6 +177,37 @@ Equality & .133 & .133 & $0$ \\
 Same $s_L=.6$, $\Lambda_I=.5$, $\widehat\sigma=1$, $\varepsilon_L=.5$ in every row. Reproduce with \texttt{python analysis/wage\_condition.py}. These inputs illustrate the sign identity; they are not solved equilibria.
 \end{frame}
 
+\begin{frame}{Extension: automation and new tasks together}
+\begin{columns}[T]
+\column{.56\textwidth}
+\centering
+\begin{tikzpicture}[x=1cm,y=1cm]
+\fill[teal!17] (0,0) -- (0,3.5) -- (4.7,3.5) -- cycle;
+\fill[orange!18] (0,0) -- (4.7,3.5) -- (4.7,0) -- cycle;
+\draw[very thick,navy] (0,0) -- (4.7,3.5);
+\draw[->,thick] (0,0) -- (5.05,0) node[below] {$\Delta I$};
+\draw[->,thick] (0,0) -- (0,3.85) node[left] {$\Delta N$};
+\node[align=center,text=teal,font=\scriptsize\bfseries] at (1.65,2.76)
+  {labor task mass\\grows};
+\node[align=center,text=orange!75!black,font=\scriptsize\bfseries] at (3.55,.86)
+  {labor task mass\\falls};
+\node[fill=white,inner sep=1pt,font=\scriptsize] at (3.45,2.88)
+  {$\Delta N=\Delta I$};
+\fill[teal] (1.95,2.5) circle (2.2pt);
+\fill[orange!80!black] (1.95,.8) circle (2.2pt);
+\end{tikzpicture}
+\column{.42\textwidth}
+\[\Delta m_L=\Delta N-\Delta I.\]
+\vspace{-.3em}
+\begin{block}{Two examples}
+$\Delta I=.15$, $\Delta N=.25$: labor task mass grows by $.10$.\\[.25em]
+$\Delta I=.15$, $\Delta N=.08$: it falls by $.07$.
+\end{block}
+\end{columns}
+\vspace{.2em}
+\footnotesize Both frontiers must bind and lie inside their task intervals. The plot concerns task mass only; it does not determine wages or employment.
+\end{frame}
+
 \begin{frame}{Where I did not trust the AI}
 \begin{alertblock}{Claim to test}
 ``Automation necessarily reduces wages and labor's share.''
@@ -184,7 +215,7 @@ Same $s_L=.6$, $\Lambda_I=.5$, $\widehat\sigma=1$, $\varepsilon_L=.5$ in every r
 \begin{itemize}
 \item Labor share falls only when the automation frontier binds; at a slack frontier, a small increase in $I$ has no effect.
 \item The wage can rise when the productivity gain dominates displacement.
-\item At $I^*=I=\widetilde I$, use one-sided derivatives.
+\item At $I^*=I=\widetilde I$, use derivatives from each side.
 \end{itemize}
 \end{frame}
 
@@ -196,19 +227,13 @@ Same $s_L=.6$, $\Lambda_I=.5$, $\widehat\sigma=1$, $\varepsilon_L=.5$ in every r
 $d\ln W/dI=P_I-D_I$, so a wage increase requires $P_I>D_I$.
 \end{frame}
 
-\IfFileExists{lean-slides.tex}{\input{lean-slides.tex}}{%
-\begin{frame}{Lean run: source to statement}
-\begin{block}{Pending run}
-The own-run formalization is in progress. This slide will show an actual source claim, exact Lean statement, and proof fragment after the check; no placeholder theorem is presented as verified.
-\end{block}
-\end{frame}
-}
+\input{lean-slides.tex}
 
 \begin{frame}{What the checks can and cannot conclude}
 \begin{itemize}
 \item The computational script verifies arithmetic on the stated wage identity.
 \item Lean's compiler can verify a formal theorem only under its encoded assumptions and domain.
-\item Matching the NBER claim requires a separate source-to-Lean comparison.
+\item Matching the NBER claim requires a separate comparison between the source and Lean statement.
 \item The full continuum equilibrium and all its comparative statics should be counted only if formally represented and proved.
 \end{itemize}
 \end{frame}
