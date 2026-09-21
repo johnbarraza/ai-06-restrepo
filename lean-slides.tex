@@ -1,0 +1,70 @@
+\begin{frame}{Lean 1/5: what entered the checker}
+\begin{block}{Pinned source}
+NBER Working Paper 22252, June 2017, 87 PDF pages. SHA-256 starts \texttt{441d0120}.
+\end{block}
+\begin{itemize}
+\item AppliedModelingLib generated the complete \texttt{AR18RaceManMachine} paper folder.
+\item The Lean target is Appendix B's algebra from (B9) and (B10) to the wage formula.
+\item The code treats the differential values as real variables and takes (B9), (B10) as explicit hypotheses.
+\end{itemize}
+\vspace{.5em}
+This is a checked \alert{support lemma}, not a proof that the economy satisfies those equations.
+\end{frame}
+
+\begin{frame}[fragile]{Lean 2/5: equation $\rightarrow$ statement $\rightarrow$ proof}
+\vspace{-.5em}
+\footnotesize
+\[\underbrace{s_L d\ln W+(1-s_L)d\ln R=p}_{\text{(B9)}},\qquad
+  \underbrace{d\ln W-d\ln R=q}_{\text{(B10)}}
+  \quad\Longrightarrow\quad d\ln W=p+(1-s_L)q.\]
+\vspace{-.5em}
+\begin{lstlisting}
+theorem wage_identity_from_B9_B10
+    (s dW dR productivity relativePrice : Real)
+    (hB9 : s*dW + (1-s)*dR = productivity)
+    (hB10 : dW-dR = relativePrice) :
+    dW = productivity + (1-s)*relativePrice := by
+  linear_combination hB9 + (1-s)*hB10
+\end{lstlisting}
+\vspace{-.5em}
+\footnotesize $s$ encodes labor's net-output share; $dW,dR$ encode the two log changes; $p$ is productivity; $q$ is the relative-price change. The slide spells Lean's $\mathbb R$ notation as \texttt{Real}. Lean verifies the algebra \emph{given} both premises.
+\end{frame}
+
+\begin{frame}{Lean 3/5: why the proof line works}
+Write (B9) and (B10) as zero-valued residuals:
+\begin{align*}
+  A &= s\,dW+(1-s)\,dR-p,\\
+  B &= dW-dR-q.
+\end{align*}
+The Lean proof uses $A+(1-s)B=0$. The $dR$ terms cancel and $s\,dW+(1-s)dW=dW$, leaving
+\[dW-p-(1-s)q=0.\]
+\vspace{.4em}
+\texttt{linear\_combination} checks that weighted sum symbolically; it does not infer (B9) or (B10) from the task model.
+\end{frame}
+
+\begin{frame}[fragile]{Lean 4/5: the exact wage condition}
+Set $q=-\Lambda_I/(\widehat\sigma+\varepsilon_L)$ for the binding-frontier case. The checked specialization gives
+\[d\ln W=P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}.\]
+\small\textit{Excerpt below: binders and repeated arguments omitted for legibility.}
+\begin{lstlisting}
+theorem automation_wage_rises_iff ... :
+    0 < dW <-> (1-s)*lambdaI/denominator
+                 < productivity := by
+  rw [automation_wage_change ...]
+  constructor <;> intro h <;> linarith
+\end{lstlisting}
+\vspace{.4em}
+\small The proposition is conditional on the encoded (B9) and (B10) identities. Its variables range over $\mathbb R$; positivity of $\widehat\sigma+\varepsilon_L$ is needed to derive (B10)'s sign from the economic primitives, not for this algebraic equivalence.
+\end{frame}
+
+\begin{frame}{Lean 5/5: results and open boundary}
+\begin{block}{Machine results}
+\texttt{lake build +AR18RaceManMachine}: passed.\\
+\texttt{paper\_contribution.py check AR18RaceManMachine --fast}: passed.\\
+Three support theorems use only \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+\end{block}
+\vspace{.4em}
+\begin{alertblock}{What remains open}
+The full continuum equilibrium, its threshold comparative statics, and the derivation of (B9) and (B10) from the paper's model. No named result is claimed as fully proved. Source-to-Lean review and final closeout were not run.
+\end{alertblock}
+\end{frame}

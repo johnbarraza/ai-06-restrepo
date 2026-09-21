@@ -1,0 +1,3 @@
+﻿high productivity gain: P=0.400000, D=0.133333, dlnW/dI=0.266667 (up), dln(W/R)/dI=-0.333333
+low productivity gain: P=0.050000, D=0.133333, dlnW/dI=-0.083333 (down), dln(W/R)/dI=-0.333333
+knife edge: P=0.133333, D=0.133333, dlnW/dI=0.000000 (flat), dln(W/R)/dI=-0.333333

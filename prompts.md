@@ -41,4 +41,33 @@ This is my own run for course Repository 6. The exact 87-page June 2017 PDF is a
 
 > La lectura del paper ya aclara el punto central: con automatización limitada por la tecnología, la participación laboral cae, pero el salario puede subir si la ganancia de productividad supera el desplazamiento. Preparé el análisis y un cálculo reproducible para mostrar ambos signos; ahora ajusto las diapositivas y revisaré el resultado real del agente Lean antes de describir sus pruebas.
 
-The agent's final result and the exact `--fast` check output will be appended after the run finishes.
+## User
+
+> continua
+
+## AppliedModelingLib agent — final tool response
+
+The configured GPT-5.6 Sol `xhigh` session completed the source-only intake and then returned this literal limit before it generated Lean files:
+
+```text
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/codex/settings/usage to purchase more credits or try again at 5:43 AM.
+tokens used
+374,823
+```
+
+The session had also found that the first Windows-mounted clone stalled during Lake configuration. A fresh native-WSL clone was therefore prepared, with its Mathlib cache, before the limit occurred. The later scaffold, support proofs, build, fast check, and copy were completed through the assistant's local tools. This distinction is disclosed in `lean/docs/RUN_HANDOFF.md`; the CLI limit is not represented as a successful complete agent workflow.
+
+## Assistant — local continuation
+
+> Continúo. El agente configurado con GPT-5.6 Sol y `xhigh` agotó la cuota justo después de verificar el clon Linux y el PDF; por eso todavía no generó la carpeta Lean. Avanzaré con las herramientas locales y dejaré registrado ese límite junto con cualquier resultado que logre comprobar.
+
+## Local check result
+
+```text
++ lake build +AR18RaceManMachine.PaperInterface
+Build completed successfully (8315 jobs).
++ git diff --check -- papers/AR18RaceManMachine papers/AR18RaceManMachine.lean lakefile.toml ':(exclude)papers/AR18RaceManMachine/source/'
+exit_code=0
+```
+
+The separate full paper target build also passed (`lake build +AR18RaceManMachine`, 8,317 jobs). These checks validate the existing Lean proof terms and repository hygiene, not the complete paper's economic claims.

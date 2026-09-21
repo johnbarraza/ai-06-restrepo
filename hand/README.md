@@ -1,6 +1,6 @@
 # Hand derivation to photograph
 
-Write this on paper yourself, then place a real photograph in this folder before submission. Use the June 2017 NBER paper, Proposition 3, technology-constrained case.
+Write this on paper yourself, then place a real photograph named `derivation.jpg` in this folder before submission so the Beamer deck displays it. Use the June 2017 NBER paper, Proposition 3, technology-constrained case.
 
 1. Copy Appendix B's identities (B9) and (B10). Set $dN=0$ in (B10).
 2. Let $x=d\ln W$, $z=d\ln R$, and $p=d\ln Y|_{K,L}$. From (B9), $s_Lx+(1-s_L)z=p$.
