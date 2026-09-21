@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="480" viewBox="0 0 820 480" role="img" aria-labelledby="title desc">
+  <title id="title">Joint task changes under a binding automation frontier</title>
+  <desc id="desc">A phase diagram with automation change on the horizontal axis and new task creation on the vertical axis. Labor task mass expands above the diagonal where new task creation exceeds automation and contracts below it.</desc>
+  <rect width="820" height="480" rx="18" fill="#f7fafc"/>
+  <text x="38" y="43" fill="#102a43" font-family="Arial, sans-serif" font-size="25" font-weight="700">When do new tasks offset automation?</text>
+  <text x="38" y="70" fill="#526b7a" font-family="Arial, sans-serif" font-size="15">Change in labor task mass = new tasks − newly automated tasks</text>
+  <path d="M110 385 L110 90 L650 90 Z" fill="#d4f1ed"/>
+  <path d="M110 385 L650 90 L650 385 Z" fill="#fbe4d4"/>
+  <path d="M110 385 L650 90" stroke="#163b56" stroke-width="3" stroke-dasharray="8 6"/>
+  <path d="M110 385 H680 M110 385 V82" stroke="#102a43" stroke-width="3" fill="none"/>
+  <path d="M680 385 l-12 -6 v12 Z M110 82 l-6 12 h12 Z" fill="#102a43"/>
+  <text x="388" y="435" text-anchor="middle" fill="#102a43" font-family="Arial, sans-serif" font-size="17" font-weight="700">Automation change ΔI</text>
+  <text x="36" y="245" transform="rotate(-90 36 245)" text-anchor="middle" fill="#102a43" font-family="Arial, sans-serif" font-size="17" font-weight="700">New task creation ΔN</text>
+  <text x="210" y="175" fill="#08695f" font-family="Arial, sans-serif" font-size="21" font-weight="700">Labor task mass grows</text>
+  <text x="426" y="316" fill="#9e511d" font-family="Arial, sans-serif" font-size="21" font-weight="700">Labor task mass falls</text>
+  <text x="460" y="171" transform="rotate(-28 460 171)" fill="#163b56" font-family="Arial, sans-serif" font-size="15" font-weight="700">ΔN = ΔI</text>
+  <circle cx="341" cy="174" r="9" fill="#08695f" stroke="#ffffff" stroke-width="3"/>
+  <text x="355" y="159" fill="#08695f" font-family="Arial, sans-serif" font-size="15">0.25 tasks, 0.15 automated</text>
+  <circle cx="341" cy="318" r="9" fill="#9e511d" stroke="#ffffff" stroke-width="3"/>
+  <text x="354" y="339" fill="#9e511d" font-family="Arial, sans-serif" font-size="15">0.08 tasks, 0.15 automated</text>
+  <text x="107" y="405" fill="#526b7a" font-family="Arial, sans-serif" font-size="13">0</text>
+  <text x="637" y="406" fill="#526b7a" font-family="Arial, sans-serif" font-size="13">0.35</text>
+  <text x="67" y="95" fill="#526b7a" font-family="Arial, sans-serif" font-size="13">0.35</text>
+  <text x="38" y="462" fill="#526b7a" font-family="Arial, sans-serif" font-size="13">Conditional task accounting only. Prices, hours, labor share, and wages are not inferred.</text>
+</svg>

@@ -1,0 +1,4 @@
+python analysis/joint_task_extension.py
+new tasks dominate: labor task mass 0.60 to 0.70; change +0.10
+automation dominates: labor task mass 0.60 to 0.53; change -0.07
+exit_code=0

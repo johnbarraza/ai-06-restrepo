@@ -1,4 +1,14 @@
+lake build +AR18RaceManMachine
+Build completed successfully (8320 jobs).
+exit_code=0
+
+python3 scripts/paper_contribution.py check AR18RaceManMachine --fast
 + lake build +AR18RaceManMachine.PaperInterface
-Build completed successfully (8317 jobs).
+Build completed successfully (8318 jobs).
 + git diff --check -- papers/AR18RaceManMachine papers/AR18RaceManMachine.lean lakefile.toml ':(exclude)papers/AR18RaceManMachine/source/'
 exit_code=0
+
+#print axioms AR18RaceManMachine.joint_task_change
+'AR18RaceManMachine.joint_task_change' depends on axioms: [propext, Classical.choice, Quot.sound]
+#print axioms AR18RaceManMachine.joint_task_change_expands_labor_iff
+'AR18RaceManMachine.joint_task_change_expands_labor_iff' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -1,4 +1,5 @@
 import AR18RaceManMachine.ComparativeStatics
+import AR18RaceManMachine.JointTaskExtension
 
 /-!
 # Paper-Facing Theorems: The Race Between Machine and Man: Implications of Technology for Growth, Factor Shares and Employment

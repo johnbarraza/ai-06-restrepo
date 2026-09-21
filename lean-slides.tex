@@ -1,4 +1,4 @@
-\begin{frame}{Lean 1/5: what entered the checker}
+\begin{frame}{Lean 1/6: what entered the checker}
 \begin{block}{Pinned source}
 NBER Working Paper 22252, June 2017, 87 PDF pages. SHA-256 starts \texttt{441d0120}.
 \end{block}
@@ -11,7 +11,7 @@ NBER Working Paper 22252, June 2017, 87 PDF pages. SHA-256 starts \texttt{441d01
 These are checked \alert{support results}; a full equilibrium construction remains open.
 \end{frame}
 
-\begin{frame}[fragile]{Lean 2/5: equation $\rightarrow$ statement $\rightarrow$ proof}
+\begin{frame}[fragile]{Lean 2/6: equation $\rightarrow$ statement $\rightarrow$ proof}
 \vspace{-.5em}
 \footnotesize
 \[\underbrace{s_L d\ln W+(1-s_L)d\ln R=p}_{\text{(B9)}},\qquad
@@ -27,10 +27,10 @@ theorem wage_identity_from_B9_B10
   linear_combination hB9 + (1-s)*hB10
 \end{lstlisting}
 \vspace{-.5em}
-\footnotesize $s$ encodes labor's net-output share; $dW,dR$ encode the two log changes; $p$ is productivity; $q$ is the relative-price change. The slide spells Lean's $\mathbb R$ notation as \texttt{Real}. Lean verifies the algebra \emph{given} both premises.
+\footnotesize $s$ encodes labor's share of net output; $dW,dR$ encode the two log changes; $p$ is productivity; $q$ is the relative price change. The slide spells Lean's $\mathbb R$ notation as \texttt{Real}. Lean verifies the algebra \emph{given} both premises.
 \end{frame}
 
-\begin{frame}{Lean 3/5: from the model identities to (B9) and (B10)}
+\begin{frame}{Lean 3/6: from the model identities to (B9) and (B10)}
 \begin{itemize}
 \item \texttt{StaticModel.lean}: $I^*=\min\{I,\widetilde I\}$; when the frontier binds, raising $I$ reduces the mass of labor tasks one for one.
 \item \texttt{B9\_from\_factorIncome}: differentiates $WL+RK=(1-\eta)Y$ with fixed $K,L$.
@@ -40,8 +40,8 @@ theorem wage_identity_from_B9_B10
 The two bridges require explicit functional identities, derivatives, and nonzero denominators. The wage proof then combines (B9) and (B10) by \texttt{linear\_combination}.
 \end{frame}
 
-\begin{frame}[fragile]{Lean 4/5: the exact wage condition}
-Set $q=-\Lambda_I/(\widehat\sigma+\varepsilon_L)$ for the binding-frontier case. The checked specialization gives
+\begin{frame}[fragile]{Lean 4/6: the exact wage condition}
+Set $q=-\Lambda_I/(\widehat\sigma+\varepsilon_L)$ when the frontier binds. The checked specialization gives
 \[d\ln W=P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}.\]
 \small\textit{Excerpt below: binders and repeated arguments omitted for legibility.}
 \begin{lstlisting}
@@ -55,7 +55,7 @@ theorem automation_wage_rises_iff ... :
 \small The displayed lemma is conditional on (B9) and (B10). The stronger \texttt{automation\_log\_wage\_rises\_iff\_from\_equation13} derives them from explicit model identities. Positivity is needed for the economic sign interpretation.
 \end{frame}
 
-\begin{frame}{Lean 5/5: results and open boundary}
+\begin{frame}{Lean 5/6: results and open boundary}
 \begin{block}{Machine results}
 \texttt{lake build +AR18RaceManMachine}: passed.\\
 \texttt{paper\_contribution.py check AR18RaceManMachine --fast}: passed.\\
@@ -63,6 +63,27 @@ The checked support theorems use only \texttt{propext}, \texttt{Classical.choice
 \end{block}
 \vspace{.4em}
 \begin{alertblock}{What remains open}
-The full equilibrium, primitive derivation of equation (13), the $dN$ wage term, and Proposition 3's capital threshold. No named result is claimed as fully proved; source-to-Lean review and final closeout remain open.
+The full equilibrium, primitive derivation of equation (13), the $dN$ wage term, and Proposition 3's capital threshold. No named result is claimed as fully proved; comparison of the source with Lean and final closeout remain open.
 \end{alertblock}
+\end{frame}
+
+\begin{frame}[fragile]{Lean 6/6: the joint task extension}
+\vspace{-.4em}
+\small
+\[m_1-m_0=\Delta N-\Delta I,\qquad m_1>m_0\iff\Delta I<\Delta N.\]
+\vspace{-.4em}
+\footnotesize\textit{Excerpt from \texttt{JointTaskExtension.lean}; the source file lists every feasibility hypothesis.}
+\begin{lstlisting}
+theorem joint_task_change_expands_labor_iff
+    (N I costBefore costAfter newTasks automation : Real)
+    ... :
+    laborTaskMass N (equilibriumThreshold I costBefore) <
+      laborTaskMass (N + newTasks)
+        (equilibriumThreshold (I + automation) costAfter) <->
+      automation < newTasks := by
+  have h := (joint_task_change ...).1
+  constructor <;> intro hsign <;> linarith
+\end{lstlisting}
+\vspace{-.4em}
+\footnotesize The slide spells Lean's $\mathbb R$ as \texttt{Real}. Lean checks the mass identity first. The final line turns it into a strict comparison. It assumes feasible task intervals and a binding technology frontier in both states. It proves no wage or employment result.
 \end{frame}

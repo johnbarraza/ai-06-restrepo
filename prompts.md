@@ -110,3 +110,13 @@ The compiled claims are support results conditional on equation (13), factor inc
 > continua
 
 The malformed Proposition 2.1 belonged to the template on `main`, while the Acemoglu and Restrepo work was on `analysis`. This revision adds navigation graphics, makes the required AppliedModelingLib Lean evidence prominent, and corrects GitHub's rendering of the task threshold before merging through the PR. The historical prompts above remain unedited.
+
+## User, extension review
+
+> revisa el readme creo que falta. ademas las diapos y el cdogi o creoq ue no teien la extension y la exteion no esta compraobad con lean. y la ppt trata de incluir graficos o svg especilametn para la extension. ademas no hagas nada con guiones. procede y revisa eso
+
+## Assistant, initial answer
+
+> Revisaré el README, la extensión, las pruebas Lean y el PDF de las diapositivas. Después conectaré la extensión con una prueba que Lean realmente acepte, añadiré gráficos vectoriales a la presentación y comprobaré el resultado compilado.
+
+The extension was added after the original configured agent run by the assistant through local tools in the same native AppliedModelingLib clone. It is not attributed to the earlier agent. The new `JointTaskExtension.lean` proves conditional task mass accounting and its strict sign condition. The exact build and check results are in [`checks/lean-fast-check.txt`](checks/lean-fast-check.txt). The SVG, Python examples, and two presentation slides illustrate this proof without claiming wage or employment effects from task mass alone.
