@@ -1,14 +1,7 @@
-# The paper
+# Source version
 
-Not committed — it is a third-party PDF and the repository should stay light.
+The analysis and Lean run use [NBER Working Paper 22252](https://www.nber.org/papers/w22252), revised June 2017 (87 PDF pages). This is the course's designated source version; the published 2018 AER article has different pagination and the title words in the opposite order.
 
-**Aouad, A., Lykouris, T., & Zhong, H. (2026).** *Human-AI Productivity Paradoxes:
-Modeling the Interplay of Skill, Effort, and AI Assistance.*
+Pinned PDF SHA-256: `441d01202afd56ef8002fc24ffc2beb51191741c0b5accb11d2534620dd616b7`.
 
-- https://arxiv.org/abs/2605.11350
-- Direct PDF: https://arxiv.org/pdf/2605.11350
-
-```bash
-curl -L -o paper/aouad-lykouris-zhong-2026-productivity-paradoxes.pdf \
-  https://arxiv.org/pdf/2605.11350
-```
+The paper PDF is not committed here. The full AppliedModelingLib source cache and generated audit artifacts are governed by the generated `lean/.gitignore` after the agent run.

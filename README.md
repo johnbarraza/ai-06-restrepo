@@ -1,103 +1,57 @@
-# Repository 1 — Aouad, Lykouris & Zhong (2026)
+# Repository 6: Acemoglu and Restrepo (2018)
 
-*Human-AI Productivity Paradoxes: Modeling the Interplay of Skill, Effort, and AI Assistance*
-[arXiv:2605.11350](https://arxiv.org/abs/2605.11350) · [cs.GT]
+![A task continuum divided between capital and labor](assets/banner.svg)
 
-> **This is the worked example** for *Artificial Intelligence and Economic
-> Modeling* (UP 2026-II). It shows what a weekly repository looks like when it is
-> done well. Yours does not have to be this long — see "What is required" below.
+[![Read the paper](assets/badges/paper.svg)](https://www.nber.org/papers/w22252)
+[![View presentation](assets/badges/slides.svg)](presentation.pdf)
+[![Explore Lean proofs](assets/badges/lean.svg)](lean/)
+[![Read prompt record](assets/badges/prompts.svg)](prompts.md)
 
----
+**The Race between Man and Machine: Implications of Technology for Growth, Factor Shares, and Employment.** *American Economic Review* 108(6), 1488–1542. [DOI](https://doi.org/10.1257/aer.20160696) · [NBER working paper 22252](https://www.nber.org/papers/w22252) · [course issue](https://github.com/alexanderquispe/AI-Econ-Modeling/issues/5)
 
-## What question the paper answers
+This repository reads the **87-page NBER version revised in June 2017**. The pinned PDF has SHA-256 `441d01202afd56ef8002fc24ffc2beb51191741c0b5accb11d2534620dd616b7`. Result and page numbering below refer to that version.
 
-When does AI assistance make a worker **less** productive?
+## Question and economic mechanism
 
-The paper picks one mechanism and pushes it: AI is a **perfectly substitutable
-input**. Skill $s$, effort $e$ and assistance $a$ enter production only through
-their sum, $x = s + e + a$. Nothing else is going on — no learning, no
-complementarity, no contracting. Everything that follows comes from that single
-modelling choice plus a linear cost of effort.
+When does automation reduce labor's share, employment, or the real wage, and when can new tasks reverse those effects? A unit measure of tasks occupies $[N-1,N]$. Tasks up to the technological frontier $I$ can use capital; those above it require labor. Because labor productivity $\gamma(i)$ rises with task complexity, competitive firms allocate lower-index tasks to capital up to $I^{\ast}=\min\lbrace I,\widetilde I\rbrace$, where $W/R=\gamma(\widetilde I)$. Raising $I$ displaces labor from existing tasks. Raising $N$ introduces new labor-intensive tasks and replaces the least complex old tasks, reinstating labor.
 
-## The agent's problem
+## The agents' problems
 
-$$\max_{e \ge 0}\; p(s+e+a) - \gamma e$$
+Firms minimize the *effective factor cost* task by task: for $i\le I$, they compare $R$ with $W/\gamma(i)$; for $i>I$, only labor is feasible (equation 5). The full unit price also reflects the intermediate-input share $\eta$, so it is not generally just that effective factor cost. A representative household chooses consumption $C$ and labor $L$ subject to $C=WL+RK$, maximizing the utility in equation (4), with increasing convex labor disutility $\nu(L)$. Its interior labor-supply condition is $\nu'(L)=W/C$. Capital $K$ and technology $(I,N)$ are fixed in the static model; factor prices, output, and the actual task threshold clear competitively.
 
-with $p$ weakly increasing, concave and twice differentiable, $\gamma > 0$, and
-one constraint that turns out to carry the whole result: $e \ge 0$.
+## Main results and conditions
 
-## The main result, with all its conditions
+Propositions 1–3 assume: **(1)** $\gamma(i)$ is strictly increasing; **(2)** either the intermediate-input share $\eta\to0$ or its substitution elasticity $\zeta=1$; and **(3)** $K<\bar K$ as defined in the paper, so the newest task is used. The task elasticity $\sigma>0$, effective elasticity $\widehat\sigma=\sigma(1-\eta)+\zeta\eta>0$, and labor-supply elasticity $\varepsilon_L>0$ enter the comparative statics. In the base environment $\eta\in(0,1)$, $\zeta>0$, $K>0$, and $\nu$ is continuously differentiable, increasing, convex, and satisfies the paper's extra concavity restriction $\nu''(L)+(\theta-1)(\nu'(L))^2/\theta>0$.
 
-Let $x^{*}$ be the **largest** maximiser of $p(x) - \gamma x$:
+When automation is **technology constrained**, $I^{\ast}=I<\widetilde I$, Proposition 2 gives
 
-$$x^{*} = \max \arg\max_{x} \left[\, p(x) - \gamma x \,\right]$$
+$$\frac{d\ln(W/R)}{dI}=\frac{d\ln\omega}{dI}=-\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}<0,\qquad \Lambda_I>0.$$
 
-This requires a **regularity condition**, without which $x^{*}$ need not exist:
+The labor share $s_L=WL/(WL+RK)=WL/[(1-\eta)Y]$ and employment move with $\omega=W/(RK)$, so both fall. Proposition 3 separates the **positive productivity effect** $P_I=d\ln Y|_{K,L}/dI$ from **displacement**:
 
-$$\limsup_{x \to \infty} \frac{p(x)}{x} < \gamma$$
+$$\frac{d\ln W}{dI}=P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}.$$
 
-**Proposition 2.1.** Under those conditions,
+Thus the real wage **rises precisely when** $P_I>(1-s_L)\Lambda_I/(\widehat\sigma+\varepsilon_L)$, falls when the inequality reverses, and is locally unchanged at equality. Automation does not necessarily reduce wages. If $I^{\ast}=\widetilde I<I$, the automation constraint is slack and a marginal rise in $I$ has no effect on factor prices or the labor share. At $I^{\ast}=I=\widetilde I$, the paper notes distinct one-sided derivatives.
 
-$$e^{*}(s,a) = \left(x^{*} - s - a\right)_{+}, \qquad
-  p^{*}(s,a) = \max\left\{ p(x^{*}),\, p(s+a) \right\}$$
+By contrast, creating new tasks ($N\uparrow$) raises $W/R$, employment, labor share, and the wage under the same maintained assumptions. This is the reinstatement effect. The static statements do not by themselves establish that the long-run wage falls: capital accumulation changes that conclusion.
 
-*Intuition in one sentence:* the agent has a single target level of total input,
-tops it up with effort, and once skill plus AI already reach it he stops working.
+## Lean formalization and verification
 
-Two things worth noticing about the proof. It is a **case split** — interior
-versus corner — and contains **no differentiation at all**; and the largest-argmax
-tie-break is not decoration, it is what makes $e^{*}$ well defined when
-$p(x)-\gamma x$ has a flat maximum.
+The `lean/` folder is the complete generated `papers/AR18RaceManMachine/` folder from our own [AppliedModelingLib](https://gargnikhil.com/AppliedModelingLib/) run. It was produced with `gpt-5.6-sol` at `xhigh` reasoning, then copied without reorganizing its files. Ordinary `git add lean/` respected the generated `.gitignore`, so the private source PDF and extracted text are not published.
 
-## Sections 3–5: stated, not derived
-
-The three headline results — the deskilling paradox, the unreliability paradox
-and skill polarisation — use machinery well beyond Section 2: a continuous-time
-birth–death Markov chain and its steady state, Arrow–Pratt risk aversion applied
-to a *production* function with IARA/DARA driving the sign, and Bayesian updating
-over a binary signal. They are worth understanding; they are not worth trying to
-reproduce in a week. See `extra/tutorial-alz-completo.pdf` for the full walk.
-
----
-
-## What is in this repository
-
-| File | What it is |
+| Checked support result | Scope |
 |---|---|
-| `README.md` | This page |
-| `prompts.md` | The full LLM conversation, unedited |
-| `extensions.md` | Which assumptions could be relaxed, and which are dead ends |
-| `hand/` | The derivation of Proposition 2.1, written out by hand |
-| `presentation.tex` / `.pdf` | The 5-minute Beamer deck |
-| `paper/` | The article itself |
-| `extra/` | Above the floor: a full tutorial of the paper and two lecture decks |
+| [Task threshold and allocation](lean/StaticModel.lean) | The task interval, cost cutoff, displacement, and new-task mass with an explicit fixed cutoff. |
+| [Appendix B bridges](lean/ComparativeStatics.lean) | Equation (13) to (B10), and fixed-factor income to (B9), under stated differentiability and nonzero assumptions. |
+| [Wage equality and sign condition](lean/MainTheorems.lean) | The automation-only wage response conditional on those model identities. |
 
-## What is required
+The [build and required fast check](checks/lean-fast-check.txt) passed. The [run handoff](lean/docs/RUN_HANDOFF.md) and [status file](lean/status.json) identify the remaining proof obligations. **Status: partially formalized.** No complete named proposition or full equilibrium is claimed.
 
-Only four things. The rest of this repository is above the floor.
+## Repository materials
 
-1. **`README.md`** — one page: the question, the agent's problem, the main result
-   **with all its conditions**.
-2. **`prompts.md`** — your prompts and the answers, **raw**. Do not tidy them up:
-   the value is in seeing where the model went wrong.
-3. **`hand/`** — at least one photograph of something you derived by hand. Not the
-   whole paper: the one step you did not believe until you did it yourself.
-4. **`presentation.tex` / `.pdf`** — the 5-minute deck, source and compiled.
+- [`analysis/wage_condition.py`](analysis/wage_condition.py) checks the Proposition 3 sign inequality using illustrative comparative-static inputs.
+- [`presentation.tex`](presentation.tex) and [`presentation.pdf`](presentation.pdf) provide the 23-slide, 20-minute deck, including five Lean slides.
+- [`prompts.md`](prompts.md) records our raw prompts and relevant responses. The repository 4 and 5 examples informed the presentation, but their dialogue and Lean work are not claimed as ours.
+- [`hand/README.md`](hand/README.md) gives the steps for the student's handwritten derivation. The required genuine photograph is still pending.
 
-Deadline is **Thursday 22:00**, work merged into `main` through a pull request,
-and the repository URL posted as a comment on that week's issue.
-
-## About `hand/`
-
-`hand/prop-2-1-derivacion-a-mano.pdf` is three phone photos of a notebook page.
-That is exactly the standard: crooked, with crossings-out, no transcription. What
-it shows is the first-order condition and the interior-versus-corner split written
-out step by step — the part I did not want to take on trust.
-
-## About the LLM conversation
-
-`prompts.md` is the export of the session that produced the tutorial in `extra/`.
-Read it for what it gets wrong as much as for what it gets right. The episode
-worth studying is on slide 4 of the presentation: asked for "the most natural
-extension", the model confidently proposed relaxing the linear cost — which the
-authors had already done in Appendix D. It took opening the appendix to find out.
+**Remaining requirement:** add a genuine photograph of the student's handwritten derivation to `hand/derivation.jpg` before the Thursday, September 24, 22:00 deadline (Lima time). The repository link must also be posted on the [course issue](https://github.com/alexanderquispe/AI-Econ-Modeling/issues/5).

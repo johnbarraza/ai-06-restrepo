@@ -1,53 +1,15 @@
-# Extensions — what could be relaxed, and what is already taken
+# Analytical check: the wage trap
 
-The paper names its own assumptions in a block just before §1.2, and lists
-exactly three: **substitutability/additivity**, **linear cost**, and **myopic
-users**. That block is the natural starting point, but it needs checking against
-the appendices before anything is claimed to be open.
+The NBER June 2017 paper's Proposition 3, technology-constrained case $I^*=I<\widetilde I$, decomposes the response to a marginal increase in the automation frontier:
 
-## Dead end: linear → convex cost
+$$d\ln W=d\ln Y|_{K,L}-(1-s_L)\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}\,dI.$$
 
-This is the first thing anyone suggests, including every LLM I asked. It is
-**already done**. Appendix D is titled *"Extension to convex cost functions
-(Remark 2.3)"* and redoes Sections 2, 3 and 4 under strictly convex $c(e)$, with
-Propositions D.3 and D.6.
+This follows directly from the two equations in Appendix B. Equation (B9) is $s_L x+(1-s_L)z=p$, where $x=d\ln W$, $z=d\ln R$, and $p=d\ln Y|_{K,L}$. Equation (B10), for $dN=0$, is $x-z=-\Lambda_I dI/(\widehat\sigma+\varepsilon_L)$. Substituting $z=x-(x-z)$ into (B9) yields $x=p+(1-s_L)(x-z)$, hence the displayed formula. Here $s_L=WL/(WL+RK)=WL/[(1-\eta)Y]$ is the share of **net** output paid to labor.
 
-Proposing it as an extension is replication, and it is the clearest example in
-this course of why the appendices have to be read before an idea is called new.
+Holding $N$ fixed and dividing by $dI>0$, let $P_I=(d\ln Y|_{K,L})/dI$. Under the proposition's maintained conditions, $P_I>0$, $\Lambda_I>0$, $0<s_L<1$, $\widehat\sigma>0$, and $\varepsilon_L>0$. Thus the displaced-task term is strictly negative even though productivity rises. The exact local wage condition is
 
-**But there is a gap inside the gap.** Appendix D covers §§2–4. It does **not**
-cover §5. Convex cost applied to the skill-polarisation result is technically
-untouched — a narrow opening, but a real one.
+$$\operatorname{sgn}\left(\frac{d\ln W}{dI}\right)=\operatorname{sgn}\left[P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}\right].$$
 
-## Live: myopia
+The relative wage-rental ratio, labor share, and employment still decline in the constrained case. One must not infer the wage sign from the labor-share sign. At a slack automation frontier, $I^*=\widetilde I<I$, marginal technological automation changes none of these outcomes. The exact kink $I^*=I=\widetilde I$ needs separate one-sided derivatives, as Proposition 2 notes.
 
-The agent maximises **short-term** utility at each state: he chooses effort to
-maximise current output net of cost, ignoring that effort today changes skill
-tomorrow. The paper is explicit that this is a maintained assumption, and it is
-never relaxed anywhere — no discount factor, no forward-looking agent, nothing.
-
-A **two-period agent** who internalises the skill transition is the most tractable
-version: solve period 2 as the static problem already characterised, then period 1
-with the continuation value attached. The question worth asking is whether the
-deskilling result survives when the agent can see it coming.
-
-## Harder: complementarity inside $p(\cdot)$
-
-The obvious move — add an interaction term between $s$ and $a$ — is partly
-pre-empted: §4.4 micro-founds AI unreliability as a negative interaction and §5.3
-micro-founds AI literacy as a positive one. So an extension has to change the
-**production primitive itself**, not bolt a term onto it. Harder to make
-tractable, and easier to end up with a model whose results are assumed rather
-than derived.
-
-## How to tell a real extension from a fake one
-
-Three questions, in order:
-
-1. **Is it in the appendices?** Check before anything else. This is where most
-   proposed extensions die.
-2. **Does one equation change, or all of them?** If relaxing the assumption
-   rewrites the whole model, it is a new paper, not an extension.
-3. **Can you say what you expect to happen?** If you cannot state the expected
-   direction of the result beforehand, you do not yet understand the mechanism
-   well enough to relax it.
+The script in `analysis/` checks sign arithmetic with illustrative inputs only. A full equilibrium calculation would have to solve equations (6), (8)–(11) jointly and enforce all task, supply, and price-index restrictions. The simple sign check does not establish those premises.

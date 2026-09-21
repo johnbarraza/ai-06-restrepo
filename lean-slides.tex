@@ -1,0 +1,68 @@
+\begin{frame}{Lean 1/5: what entered the checker}
+\begin{block}{Pinned source}
+NBER Working Paper 22252, June 2017, 87 PDF pages. SHA-256 starts \texttt{441d0120}.
+\end{block}
+\begin{itemize}
+\item AppliedModelingLib generated the complete \texttt{AR18RaceManMachine} paper folder.
+\item Lean encodes the task cutoff, equation (13), factor income, and Appendix B's (B9)--(B10) bridge.
+\item The wage theorem assumes equation (13) and factor income as functional identities, with differentiability and nonzero conditions.
+\end{itemize}
+\vspace{.5em}
+These are checked \alert{support results}; a full equilibrium construction remains open.
+\end{frame}
+
+\begin{frame}[fragile]{Lean 2/5: equation $\rightarrow$ statement $\rightarrow$ proof}
+\vspace{-.5em}
+\footnotesize
+\[\underbrace{s_L d\ln W+(1-s_L)d\ln R=p}_{\text{(B9)}},\qquad
+  \underbrace{d\ln W-d\ln R=q}_{\text{(B10)}}
+  \quad\Longrightarrow\quad d\ln W=p+(1-s_L)q.\]
+\vspace{-.5em}
+\begin{lstlisting}
+theorem wage_identity_from_B9_B10
+    (s dW dR productivity relativePrice : Real)
+    (hB9 : s*dW + (1-s)*dR = productivity)
+    (hB10 : dW-dR = relativePrice) :
+    dW = productivity + (1-s)*relativePrice := by
+  linear_combination hB9 + (1-s)*hB10
+\end{lstlisting}
+\vspace{-.5em}
+\footnotesize $s$ encodes labor's net-output share; $dW,dR$ encode the two log changes; $p$ is productivity; $q$ is the relative-price change. The slide spells Lean's $\mathbb R$ notation as \texttt{Real}. Lean verifies the algebra \emph{given} both premises.
+\end{frame}
+
+\begin{frame}{Lean 3/5: from the model identities to (B9) and (B10)}
+\begin{itemize}
+\item \texttt{StaticModel.lean}: $I^*=\min\{I,\widetilde I\}$; when the frontier binds, raising $I$ reduces the mass of labor tasks one for one.
+\item \texttt{B9\_from\_factorIncome}: differentiates $WL+RK=(1-\eta)Y$ with fixed $K,L$.
+\item \texttt{B10\_from\_relativeDemandEquation}: differentiates equation (13), including the task integral, and uses $\omega=W/(RK)$.
+\end{itemize}
+\vspace{.4em}
+The two bridges require explicit functional identities, derivatives, and nonzero denominators. The wage proof then combines (B9) and (B10) by \texttt{linear\_combination}.
+\end{frame}
+
+\begin{frame}[fragile]{Lean 4/5: the exact wage condition}
+Set $q=-\Lambda_I/(\widehat\sigma+\varepsilon_L)$ for the binding-frontier case. The checked specialization gives
+\[d\ln W=P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}.\]
+\small\textit{Excerpt below: binders and repeated arguments omitted for legibility.}
+\begin{lstlisting}
+theorem automation_wage_rises_iff ... :
+    0 < dW <-> (1-s)*lambdaI/denominator
+                 < productivity := by
+  rw [automation_wage_change ...]
+  constructor <;> intro h <;> linarith
+\end{lstlisting}
+\vspace{.4em}
+\small The displayed lemma is conditional on (B9) and (B10). The stronger \texttt{automation\_log\_wage\_rises\_iff\_from\_equation13} derives them from explicit model identities. Positivity is needed for the economic sign interpretation.
+\end{frame}
+
+\begin{frame}{Lean 5/5: results and open boundary}
+\begin{block}{Machine results}
+\texttt{lake build +AR18RaceManMachine}: passed.\\
+\texttt{paper\_contribution.py check AR18RaceManMachine --fast}: passed.\\
+The checked support theorems use only \texttt{propext}, \texttt{Classical.choice}, and \texttt{Quot.sound}.
+\end{block}
+\vspace{.4em}
+\begin{alertblock}{What remains open}
+The full equilibrium, primitive derivation of equation (13), the $dN$ wage term, and Proposition 3's capital threshold. No named result is claimed as fully proved; source-to-Lean review and final closeout remain open.
+\end{alertblock}
+\end{frame}
