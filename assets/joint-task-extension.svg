@@ -11,13 +11,26 @@
   <path d="M680 385 l-12 -6 v12 Z M110 82 l-6 12 h12 Z" fill="#102a43"/>
   <text x="388" y="435" text-anchor="middle" fill="#102a43" font-family="Arial, sans-serif" font-size="17" font-weight="700">Automation change ΔI</text>
   <text x="36" y="245" transform="rotate(-90 36 245)" text-anchor="middle" fill="#102a43" font-family="Arial, sans-serif" font-size="17" font-weight="700">New task creation ΔN</text>
-  <text x="210" y="175" fill="#08695f" font-family="Arial, sans-serif" font-size="21" font-weight="700">Labor task mass grows</text>
-  <text x="426" y="316" fill="#9e511d" font-family="Arial, sans-serif" font-size="21" font-weight="700">Labor task mass falls</text>
+  <text x="148" y="130" fill="#08695f" font-family="Arial, sans-serif" font-size="19" font-weight="700">Labor task mass</text>
+  <text x="205" y="153" fill="#08695f" font-family="Arial, sans-serif" font-size="19" font-weight="700">grows</text>
+  <text x="455" y="286" fill="#9e511d" font-family="Arial, sans-serif" font-size="19" font-weight="700">Labor task mass</text>
+  <text x="507" y="309" fill="#9e511d" font-family="Arial, sans-serif" font-size="19" font-weight="700">falls</text>
   <text x="460" y="171" transform="rotate(-28 460 171)" fill="#163b56" font-family="Arial, sans-serif" font-size="15" font-weight="700">ΔN = ΔI</text>
   <circle cx="341" cy="174" r="9" fill="#08695f" stroke="#ffffff" stroke-width="3"/>
-  <text x="355" y="159" fill="#08695f" font-family="Arial, sans-serif" font-size="15">0.25 tasks, 0.15 automated</text>
+  <text x="356" y="178" fill="#08695f" font-family="Arial, sans-serif" font-size="16" font-weight="700">A</text>
   <circle cx="341" cy="318" r="9" fill="#9e511d" stroke="#ffffff" stroke-width="3"/>
-  <text x="354" y="339" fill="#9e511d" font-family="Arial, sans-serif" font-size="15">0.08 tasks, 0.15 automated</text>
+  <text x="356" y="322" fill="#9e511d" font-family="Arial, sans-serif" font-size="16" font-weight="700">B</text>
+  <text x="675" y="108" fill="#102a43" font-family="Arial, sans-serif" font-size="15" font-weight="700">Marked cases</text>
+  <rect x="670" y="119" width="138" height="76" rx="7" fill="#ffffff" stroke="#78bdb5"/>
+  <text x="682" y="140" fill="#08695f" font-family="Arial, sans-serif" font-size="15" font-weight="700">A</text>
+  <text x="702" y="140" fill="#102a43" font-family="Arial, sans-serif" font-size="13">ΔI = 0.15</text>
+  <text x="702" y="158" fill="#102a43" font-family="Arial, sans-serif" font-size="13">ΔN = 0.25</text>
+  <text x="682" y="181" fill="#08695f" font-family="Arial, sans-serif" font-size="13" font-weight="700">Δm<tspan baseline-shift="sub" font-size="10">L</tspan> = +0.10</text>
+  <rect x="670" y="210" width="138" height="76" rx="7" fill="#ffffff" stroke="#dda77f"/>
+  <text x="682" y="231" fill="#9e511d" font-family="Arial, sans-serif" font-size="15" font-weight="700">B</text>
+  <text x="702" y="231" fill="#102a43" font-family="Arial, sans-serif" font-size="13">ΔI = 0.15</text>
+  <text x="702" y="249" fill="#102a43" font-family="Arial, sans-serif" font-size="13">ΔN = 0.08</text>
+  <text x="682" y="272" fill="#9e511d" font-family="Arial, sans-serif" font-size="13" font-weight="700">Δm<tspan baseline-shift="sub" font-size="10">L</tspan> = −0.07</text>
   <text x="107" y="405" fill="#526b7a" font-family="Arial, sans-serif" font-size="13">0</text>
   <text x="637" y="406" fill="#526b7a" font-family="Arial, sans-serif" font-size="13">0.35</text>
   <text x="67" y="95" fill="#526b7a" font-family="Arial, sans-serif" font-size="13">0.35</text>
