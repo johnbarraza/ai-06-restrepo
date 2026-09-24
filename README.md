@@ -62,9 +62,7 @@ The [build and required fast check](checks/lean-fast-check.txt) passed. The [run
 
 - [`analysis/wage_condition.py`](analysis/wage_condition.py) checks the Proposition 3 sign inequality using illustrative comparative-static inputs.
 - [`presentation.tex`](presentation.tex) and [`presentation.pdf`](presentation.pdf) provide the 20 minute deck, including a graphic and Lean proof for the extension.
-- [`prompts.md`](prompts.md) records our raw prompts and relevant responses. The repository 4 and 5 examples informed the presentation, but their dialogue and Lean work are not claimed as ours.
-- [`hand/README.md`](hand/README.md) gives the steps for the student's handwritten derivation. The required genuine photograph is still pending.
-
-**Submission record:** the `analysis` branch was merged through [PR #1](https://github.com/johnbarraza/ai-06-restrepo/pull/1), and the repository URL was [posted on the course issue](https://github.com/alexanderquispe/AI-Econ-Modeling/issues/5#issuecomment-5765945542). **Remaining requirement:** add a genuine photograph of the student's handwritten derivation to `hand/derivation.jpg` before Thursday, September 24, 22:00 Lima time.
+- [`prompts.md`](prompts.md) records the Repository 6 instructions, our prompts, and the relevant responses from the actual run.
+- [`hand/derivation.jpg`](hand/derivation.jpg) is the genuine handwritten derivation used in the presentation; [`hand/README.md`](hand/README.md) summarizes the calculation.
 
 [Original course repository](https://github.com/alexanderquispe/AI-Econ-Modeling)
