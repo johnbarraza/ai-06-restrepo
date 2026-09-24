@@ -226,11 +226,28 @@ Same $s_L=.6$, $\Lambda_I=.5$, $\widehat\sigma=1$, $\varepsilon_L=.5$ in every r
 \end{frame}
 
 \begin{frame}{Hand check: the decisive inequality}
-\IfFileExists{hand/derivation.jpg}{\centering\includegraphics[height=.62\textheight]{hand/derivation.jpg}}{
-\begin{center}\fbox{\parbox{.75\textwidth}{\centering Real photograph of the student's handwritten derivation pending. See \texttt{hand/README.md}.}}\end{center}}
-\vspace{.3em}
-\centering\small
-$d\ln W/dI=P_I-D_I$, so a wage increase requires $P_I>D_I$.
+\begin{columns}[T,onlytextwidth]
+\column{.40\textwidth}
+\centering
+\IfFileExists{hand/derivation.jpg}{\includegraphics[height=.72\textheight]{hand/derivation.jpg}}{
+\fbox{\parbox{.92\linewidth}{\centering Real photograph of the student's handwritten derivation pending. See \texttt{hand/README.md}.}}}
+\column{.57\textwidth}
+\begin{block}{What equation (B10) fixes}
+\[
+\frac{d\ln(W/R)}{dI}
+=-\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}<0.
+\]
+The wage falls relative to the rental price of capital.
+\end{block}
+\begin{alertblock}{My verdict after solving (B9)--(B10)}
+\[
+\frac{d\ln W}{dI}=P_I-D_I,
+\qquad
+W\uparrow\iff P_I>D_I.
+\]
+A fall in $W/R$ does not imply a fall in $W$: productivity can dominate displacement.
+\end{alertblock}
+\end{columns}
 \end{frame}
 
 \input{lean-slides.tex}
