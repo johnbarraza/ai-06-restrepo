@@ -13,25 +13,85 @@ This repository reads the **NBER version revised in June 2017 (87 pages)**. The 
 
 ## Question and economic mechanism
 
-When does automation reduce labor's share, employment, or the real wage, and when can new tasks reverse those effects? A unit measure of tasks occupies $[N-1,N]$. Tasks up to the technological frontier $I$ can use capital; those above it require labor. Because labor productivity $\gamma(i)$ rises with task complexity, competitive firms allocate tasks with lower indices to capital up to $I^{\ast}=\min\lbrace I,\widetilde I\rbrace$, where $W/R=\gamma(\widetilde I)$. Raising $I$ displaces labor from existing tasks. Raising $N$ introduces new tasks that use labor and replaces the least complex old tasks, reinstating labor.
+When does automation reduce labor's share, employment, or the real wage, and when can new tasks reverse those effects? A unit measure of tasks occupies
+
+$$i\in[N-1,N].$$
+
+Tasks up to the technological frontier $I$ can use capital; tasks above it require labor. Because labor productivity $\gamma(i)$ rises with task complexity, competitive firms assign lower-index tasks to capital. The effective automation threshold and the cost-equality threshold satisfy
+
+$$I^{\ast}=\min(I,\widetilde I),
+\qquad
+\frac{W}{R}=\gamma(\widetilde I).$$
+
+Raising $I$ displaces labor from existing tasks. Raising $N$ introduces new tasks that use labor and replaces the least complex old tasks, reinstating labor.
 
 ## The agents' problems
 
-Firms minimize the *effective factor cost* task by task: for $i\le I$, they compare $R$ with $W/\gamma(i)$; for $i>I$, only labor is feasible (equation 5). The full unit price also reflects the intermediate input share $\eta$, so it is not generally just that effective factor cost. A representative household chooses consumption $C$ and labor $L$ subject to $C=WL+RK$, maximizing the utility in equation (4), with increasing convex labor disutility $\nu(L)$. Its interior labor supply condition is $\nu'(L)=W/C$. Capital $K$ and technology $(I,N)$ are fixed in the static model; factor prices, output, and the actual task threshold clear competitively.
+**Firms.** For every task with $i\le I$, firms compare the rental price of capital $R$ with the effective labor cost $W/\gamma(i)$. For $i>I$, only labor is technologically feasible (equation 5). The full unit price also reflects the intermediate-input share $\eta$.
+
+**Household.** A representative household chooses consumption $C$ and labor $L$ subject to
+
+$$C=WL+RK,
+\qquad
+\nu'(L)=\frac{W}{C},$$
+
+where $\nu(L)$ is increasing and convex labor disutility.
+
+**Equilibrium.** Capital $K$ and technology $(I,N)$ are fixed in the static model. Factor prices, output, labor supply, and the effective task threshold clear competitively.
 
 ## Main results and conditions
 
-Propositions 1 to 3 assume: **(1)** $\gamma(i)$ is strictly increasing; **(2)** either the intermediate input share $\eta\to0$ or its substitution elasticity $\zeta=1$; and **(3)** $K<\bar K$ as defined in the paper, so the newest task is used. The task elasticity $\sigma>0$, effective elasticity $\widehat\sigma=\sigma(1-\eta)+\zeta\eta>0$, and labor supply elasticity $\varepsilon_L>0$ enter the comparative statics. In the base environment $\eta\in(0,1)$, $\zeta>0$, $K>0$, and $\nu$ is continuously differentiable, increasing, convex, and satisfies the paper's extra concavity restriction $\nu''(L)+(\theta-1)(\nu'(L))^2/\theta>0$.
+Propositions 1 to 3 maintain three central conditions:
 
-When automation is **technology constrained**, $I^{\ast}=I<\widetilde I$, Proposition 2 gives
+1. $\gamma(i)$ is strictly increasing.
+2. Either the intermediate-input share tends to zero, $\eta\to0$, or its substitution elasticity satisfies $\zeta=1$.
+3. $K<\bar K$, as defined in the paper, so the newest task is used.
 
-$$\frac{d\ln(W/R)}{dI}=\frac{d\ln\omega}{dI}=-\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}<0,\qquad \Lambda_I>0.$$
+The comparative statics also use
 
-The labor share $s_L=WL/(WL+RK)=WL/[(1-\eta)Y]$ and employment move with $\omega=W/(RK)$, so both fall. Proposition 3 separates the **positive productivity effect** $P_I=d\ln Y|_{K,L}/dI$ from **displacement**:
+$$\sigma>0,
+\qquad
+\widehat\sigma=\sigma(1-\eta)+\zeta\eta>0,
+\qquad
+\varepsilon_L>0.$$
 
-$$\frac{d\ln W}{dI}=P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}.$$
+In the base environment, $\eta\in(0,1)$, $\zeta>0$, and $K>0$. The labor-disutility function $\nu$ is continuously differentiable, increasing, convex, and satisfies
 
-Thus the real wage **rises precisely when** $P_I>(1-s_L)\Lambda_I/(\widehat\sigma+\varepsilon_L)$, falls when the inequality reverses, and is locally unchanged at equality. Automation does not necessarily reduce wages. If $I^{\ast}=\widetilde I<I$, the automation constraint is slack and a marginal rise in $I$ has no effect on factor prices or the labor share. At $I^{\ast}=I=\widetilde I$, the paper notes distinct derivatives from each side.
+$$\nu''(L)+\frac{\theta-1}{\theta}\bigl(\nu'(L)\bigr)^2>0.$$
+
+When automation is **technology constrained**, Proposition 2 gives
+
+$$I^{\ast}=I<\widetilde I,
+\qquad
+\frac{d\ln(W/R)}{dI}
+=-\frac{\Lambda_I}{\widehat\sigma+\varepsilon_L}<0,
+\qquad
+\Lambda_I>0.$$
+
+The labor share and normalized wage are
+
+$$s_L=\frac{WL}{WL+RK}=\frac{WL}{(1-\eta)Y},
+\qquad
+\omega=\frac{W}{RK}.$$
+
+Because $K$ is fixed in this comparative static, $d\ln\omega=d\ln(W/R)$. The labor share and employment therefore fall in the constrained case. Proposition 3 separates the positive **productivity effect** from **displacement**:
+
+$$P_I=\frac{d\ln Y\vert_{K,L}}{dI},
+\qquad
+\frac{d\ln W}{dI}
+=P_I-\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}.$$
+
+Consequently,
+
+$$\boxed{
+\frac{d\ln W}{dI}>0
+\iff
+P_I>\frac{(1-s_L)\Lambda_I}{\widehat\sigma+\varepsilon_L}
+}.$$
+
+The real wage rises when productivity dominates displacement, falls when the inequality reverses, and is locally unchanged at equality. Thus automation does not necessarily reduce wages.
+
+**Slack frontier.** If $I^{\ast}=\widetilde I<I$, a marginal increase in $I$ has no effect on factor prices or the labor share. At the kink $I^{\ast}=I=\widetilde I$, the paper requires derivatives from each side.
 
 By contrast, creating new tasks ($N\uparrow$) raises $W/R$, employment, labor share, and the wage under the same maintained assumptions. This is the reinstatement effect. The static statements do not by themselves establish that the wage falls in the long run: capital accumulation changes that conclusion.
 
